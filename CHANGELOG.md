@@ -1,3 +1,10 @@
+# 1.0.0 (2023-10-16)
+
+
+### Bug Fixes
+
+* Dockerfile for production ([c3b003f](https://github.com/cataas/cataas/commit/c3b003f00b7b9a170ddfd3db22dda01005802776))
+
 # [1.4.0](https://github.com/boutdecode/site-template/compare/v1.3.0...v1.4.0) (2023-09-21)
 
 
