@@ -27,12 +27,12 @@ module.exports = {
         return res.routeMatched
       },
 
-      /* get analytics() {
+      get analytics() {
         return {
-          url: `${config.umami.url}/script.js`,
-          websiteId: config.umami.websiteId,
+          url: `${config.get('analytics.url')}/script.js`,
+          websiteId: config.get('analytics.websiteId'),
         }
-      }, */
+      },
 
       get url () {
         return config.get('application.hostname') + req.uri

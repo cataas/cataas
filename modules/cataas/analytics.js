@@ -1,3 +1,5 @@
+const config = require('../../src/shared/configuration/configurator')
+
 module.exports = {
   sendAnalytic (req) {
     if (req.headers['user-agent']) {
@@ -9,7 +11,7 @@ module.exports = {
         },
         body: JSON.stringify({
           payload: {
-            website: '48df2664-03fc-478e-a271-1baea1695dcf',
+            website: config.get('analytics.websiteId', process.env.ANALYTICS_ID),
             url: req.url,
             referrer: req.headers.referer || '',
             hostname: req.headers.host

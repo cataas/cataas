@@ -91,8 +91,10 @@ module.exports = app => {
   app.post('/upload', async (req, res) => {
     try {
       await createCat(req.body)
-    } catch ({ message }) {
-      return res.render('upload', { error: message })
+    } catch (e) {
+      console.error(e)
+
+      return res.render('upload', { error: e.message })
     }
 
     res.render('upload', { ok: true })

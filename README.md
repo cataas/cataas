@@ -1,8 +1,8 @@
-# Site Template
+# Cataas
 
-![https://boutdecode.fr](https://boutdecode.fr/img/logo.png)
+Cat as a service
 
-[Bout de code](https://boutdecode.fr) - Développement de site internet et blog avec de vrais morceaux de codes, simples, élégants, utiles (parfois) et surtout sans fioriture.
+Is a REST API to spread peace and love (or not) thanks to cats.
 
 ## Installation
 

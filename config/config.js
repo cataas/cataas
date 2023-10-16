@@ -38,6 +38,10 @@ configurator.set({
   translation: {
     fallback: process.env.LOCALE,
     locales: ['fr', 'en']
+  },
+  analytics: {
+    url: 'https://analytics.boutdecode.fr',
+    websiteId: process.env.ANALYTICS_ID
   }
 })
 
