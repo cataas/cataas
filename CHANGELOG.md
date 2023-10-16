@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/cataas/cataas/compare/v1.0.0...v1.0.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* Analytics Token ([de3a4f2](https://github.com/cataas/cataas/commit/de3a4f2d64b5020fbe6b864ed1a3b81a3be8d444))
+
 # 1.0.0 (2023-10-16)
 
 
