@@ -1,0 +1,85 @@
+.DEFAULT_GOAL := help
+
+UID := $(shell id -u)
+GID := $(shell id -g)
+
+DOCKER?=docker
+DOCKER_COMPOSE?=docker-compose
+EXECJS?=$(DOCKER) run -it --rm -u $(UID):$(GID) -v "$(shell pwd)/":/home/app -w /home/app node:lts-alpine
+EXECJS_ROOT=$(DOCKER) run -it --rm -v "$(shell pwd)/":/home/app -w /home/app node:lts-alpine
+
+##
+## Project setup
+##---------------------------------------------------------------------------
+.PHONY: up stop clear restart
+
+install: build ## Install the project with vendors update
+
+up: ## Start the project without vendors update
+	$(DOCKER_COMPOSE) up --remove-orphans
+
+start: public/build up ## Start the project with vendors update
+
+stop: ## Do nothing
+	$(DOCKER_COMPOSE) kill
+	$(DOCKER_COMPOSE) rm -v --force
+
+restart:
+	$(DOCKER_COMPOSE) restart
+
+reset: clear build ## Stop clear and install
+
+clear: stop ## clear project
+	rm -Rf node_modules npm-cache dist
+	rm docker-dev.lock
+
+##
+## Assets
+##---------------------------------------------------------------------------
+.PHONY: assets watch
+
+assets: node_modules ## Build the development version of the assets
+	@$(EXECJS) npm run build
+
+watch: node_modules ## Watch the assets and build their development version on change
+	@$(EXECJS) npm run watch
+
+##
+## Dependencies
+##---------------------------------------------------------------------------
+.PHONY: rm-docker-dev.lock
+
+build: .env docker-dev.lock node_modules
+
+docker-dev.lock:
+	$(DOCKER_COMPOSE) pull --ignore-pull-failures
+	$(DOCKER_COMPOSE) build --force-rm --pull
+	touch docker-dev.lock
+
+rm-docker-dev.lock:
+	rm -f docker-dev.lock
+
+node_modules: package-lock.json
+	@$(EXECJS) npm install
+	@$(EXECJS) npm install --force --arch=x64 --platform=linux --libc=musl sharp
+
+package-lock.json: package.json
+	@echo JS vendors are not up to date.
+
+public/build: assets
+
+.env:
+	@cp .env.dist .env
+
+##
+## Utilities
+##---------------------------------------------------------------------------
+.PHONY: help console
+
+console:
+	@$(EXECJS_ROOT) bin/console
+
+help:
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+
+-include Makefile.local

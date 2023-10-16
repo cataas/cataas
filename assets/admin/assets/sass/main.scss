@@ -1,0 +1,20 @@
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+
+@import "utilities";
+@import "elements";
+
+@import "reboot";
+
+@font-face {
+    font-family: 'VarelaRound';
+    src: url('@admin/assets/fonts/VarelaRound-Regular.ttf');
+}
+
+body {
+    font-family: VarelaRound, Arial, sans-serif;
+    background: #f7f8f8 url('@admin/assets/images/pattern.png') repeat scroll 0% 0%;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}

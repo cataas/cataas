@@ -1,0 +1,92 @@
+@import "variables";
+@import "bootstrap/scss/bootstrap";
+
+@import "reboot";
+
+@font-face {
+    font-family: 'VarelaRound';
+    src: url('@front/assets/fonts/VarelaRound-Regular.ttf');
+}
+
+body {
+    font-family: VarelaRound, Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/** INDEX **/
+.home-banner {
+    position: relative;
+    width: 100%;
+    background: url("@front/assets/images/banner.png");
+    background-size: cover;
+}
+
+.home-banner img {
+    width: 10%;
+}
+
+.home-banner-content-container {
+    position: absolute;
+    width: 100%;
+    top: 25%;
+}
+
+.home-banner-content {
+    color: white;
+    font-size: 1.5em;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+@media (min-width: 1501px) {
+    .home-banner {
+        min-height: 600px;
+    }
+}
+
+
+@media (min-width: 992px) and (max-width: 1500px) {
+    .home-banner img {
+        width: 12.5%;
+    }
+
+    .home-banner-content-container {
+        top: 50px;
+    }
+
+    .home-banner {
+        min-height: 380px;
+        max-height: 380px;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .home-banner img {
+        width: 20%;
+    }
+
+    .home-banner {
+        min-height: 500px;
+        max-height: 500px;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-banner-content-container {
+        top: 20px;
+    }
+
+    .home-banner img {
+        width: 25%;
+    }
+
+    .home-banner {
+        min-height: 400px;
+        overflow: hidden;
+    }
+}

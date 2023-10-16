@@ -1,0 +1,39 @@
+doctype html
+html(lang=locale)
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+        block description
+            meta(name="description", content=settings('metaDescription'))
+
+        meta(name="author", content=settings('metaAuthor'))
+
+        block metadata
+            meta(property="og:title", content=settings('metaTitle'))
+            meta(property="og:description", content=settings('metaDescription'))
+            meta(property="og:url", content=url)
+
+        meta(property="og:type", content="website")
+        meta(property="og:image", content="https://cataas.com/cat/says/cataas.com?t=sq")
+
+        script(src="//analytics.boutdecode.fr/script.js", data-website-id="48df2664-03fc-478e-a271-1baea1695dcf", async)
+
+        block title
+            title=settings('metaTitle')
+
+        link(rel="icon", type="image/png", href="/cat?width=32&height=32")
+        link(rel="canonical" href=canonical)
+
+        block style
+            link(rel="stylesheet", href=asset('front/main.css'))
+
+        block script
+            script(src=asset('front/main.js'))
+
+    body
+        include includes/topbar
+
+        block content
+
+        include includes/footer

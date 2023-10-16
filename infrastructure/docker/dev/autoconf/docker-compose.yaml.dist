@@ -1,0 +1,13 @@
+version: "3.6"
+
+services:
+    web:
+        build: .
+        tty: true
+        env_file:
+            - .env
+        ports:
+            - "${NODE_PORT}:${NODE_PORT}"
+        volumes:
+            - .:/home/app
+            - ~/.npm:/.npm

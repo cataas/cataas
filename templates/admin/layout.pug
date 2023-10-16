@@ -1,0 +1,19 @@
+doctype html
+html(lang=locale)
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+        block title
+            title=trans('admin')
+
+        link(rel="icon", type="image/png", href="/cat?width=32&height=32")
+
+        block style
+            link(href=asset('admin/main.css'), rel="stylesheet", type="text/css")
+
+        block script
+            script(src=asset('admin/main.js'), type="module")
+
+    body
+      block content

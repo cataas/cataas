@@ -1,0 +1,227 @@
+@import "bootstrap/scss/mixins/breakpoints";
+
+.viewport {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .flex-fill;
+    @extend .h-lg-full;
+}
+
+.sidebar {
+    @extend .navbar;
+    @extend .px-0;
+    @extend .py-lg-4;
+    @extend .py-md-3;
+    @extend .align-items-start;
+    @extend .h-lg-screen;
+    @extend .border-end;
+    @extend .bg-body-tertiary;
+
+    &:not(.reduced) {
+        min-width: 270px;
+    }
+
+    &.reduced {
+        @extend .align-items-center;
+        width: 80px;
+
+        i {
+            margin: 0 !important;
+        }
+
+        .sidebar-content,
+        .sidebar-title,
+        .sidebar-footer {
+            display: none;
+        }
+    }
+
+    .sidebar-container {
+        @extend .w-100;
+        @extend .h-100;
+        @extend .px-0;
+        @extend .d-flex;
+        @extend .flex-column;
+    }
+
+    .sidebar-brand {
+        @extend .d-flex;
+        @extend .align-items-center;
+        @extend .navbar-brand;
+        @extend .d-block;
+        @extend .mx-0;
+        @extend .mb-lg-4;
+        @extend .mb-3;
+        @extend .px-lg-4;
+        @extend .px-3;
+
+        svg {
+            @extend .me-2;
+        }
+    }
+
+    .sidebar-footer {
+        @extend .mt-auto;
+        @extend .px-lg-4;
+        @extend .px-3;
+
+        .sidebar-nav {
+            @extend .mx-0;
+            @extend .px-0;
+        }
+    }
+
+    .sidebar-nav {
+        @extend .navbar-nav;
+        @extend .list-group;
+        @extend .px-3;
+        @extend .mb-lg-4;
+        @extend .mb-md-3;
+        @extend .gap-1;
+
+        .sidebar-item-action {
+            @extend .d-flex;
+            @extend .align-items-center;
+            @extend .list-group-item;
+            @extend .list-group-item-action;
+            @extend .border-0;
+            @extend .rounded-1;
+
+            svg {
+                @extend .me-2;
+            }
+        }
+
+        .sidebar-item {
+            @extend .d-flex;
+            @extend .align-items-center;
+            @extend .nav-item;
+            @extend .list-group-item;
+            @extend .border-0;
+
+            a {
+                @extend .nav-link;
+            }
+
+            svg {
+                @extend .me-2;
+            }
+        }
+    }
+
+    .sidebar-title {
+        @extend .px-lg-4;
+        @extend .px-3;
+        @extend .py-lg-2;
+        @extend .py-1;
+
+        color: $gray-700;
+        font-weight: 400;
+    }
+
+    .sidebar-close-button {
+        @extend .d-none;
+        @extend .float-end;
+        @extend .me-2;
+        @extend .text-dark;
+    }
+
+    &.show {
+        .sidebar-close-button {
+            @extend .d-block;
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        &.sidebar-lg-collapse:not(.show) {
+            display: none;
+        }
+
+        &.sidebar-lg-collapse.show {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 100;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        &.sidebar-md-collapse:not(.show) {
+            display: none;
+        }
+
+        &.sidebar-md-collapse.show {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 100;
+        }
+    }
+}
+
+.sidebar-lg-toggle {
+    display: none;
+}
+
+.sidebar-md-toggle {
+    display: none;
+}
+
+@include media-breakpoint-down(lg) {
+    .sidebar-lg-toggle {
+        display: block;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .sidebar-md-toggle {
+        display: block;
+    }
+}
+
+.top-navbar-wrapper {
+    @extend .position-sticky;
+    @extend .top-0;
+    @extend .overlap-10;
+
+    &:not(.mb-0) {
+        @extend .mb-lg-5;
+        @extend .mb-4;
+    }
+}
+
+.top-navbar {
+    @extend .navbar;
+    @extend .navbar-expand-lg;
+    @extend .border-bottom;
+    @extend .bg-body-tertiary;
+
+    .navbar-container {
+        @extend .container-fluid;
+        @extend .py-lg-2;
+        @extend .px-lg-3;
+    }
+}
+
+.footer {
+    z-index: 10;
+}
+
+.table-content {
+    @extend .table;
+    @extend .table-hover;
+    @extend .table-borderless;
+    @extend .mb-0;
+
+    thead {
+        @extend .table-light;
+    }
+
+    tbody tr {
+        @extend .border-top;
+    }
+
+    th, td {
+        @extend .align-middle;
+        @extend .p-lg-4;
+        @extend .p-md-3;
+    }
+}

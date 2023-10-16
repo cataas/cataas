@@ -1,0 +1,53 @@
+.DEFAULT_GOAL := help
+EXECJS?=
+
+##
+## Project setup
+##---------------------------------------------------------------------------
+.PHONY: help install
+
+install: start ## Install and start the project with vendors update
+
+start: public/build ## Start the project with vendors update
+
+stop: ## Remove docker containers
+
+reset: clear start ## Stop clear and install
+
+clear: stop ## clear project
+	rm -Rf node_modules npm-cache public/build
+
+##
+## Assets
+##---------------------------------------------------------------------------
+.PHONY: assets watch
+
+assets: node_modules ## Build the development version of the assets
+	@$(EXECJS) npm run build
+
+watch: node_modules ## Watch the assets and build their development version on change
+	@$(EXECJS) npm run watch
+
+##
+## Dependencies
+##---------------------------------------------------------------------------
+node_modules: package-lock.json
+	@$(EXECJS) npm install
+
+package-lock.json: package.json
+	@echo JS vendors are not up to date.
+
+public/build: assets
+
+##
+## Utilities
+##---------------------------------------------------------------------------
+.PHONY: help
+
+console:
+	@$(EXECJS) bin/console
+
+help:
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+
+-include Makefile.local

@@ -1,0 +1,174 @@
+extends layout
+
+block content
+    div.home-banner
+        div.home-banner-content-container
+            div.home-banner-content.container
+                h1 CATAAS
+                h2 Cat as a service
+
+                p Is a REST API to spread peace and love (or not) thanks to cats.
+                    br
+                    | Have&nbsp;
+                    span#count.count 0
+                    | &nbsp;cats for now
+
+                a(href="/cat", target="_blank").btn.btn-primary.btn-lg Give me a cat
+
+    section.container.mt-4
+        p.alert.alert-success
+            | Hey ! Do you like Cataas? Do you want to support the project ?
+            a.btn.btn-primary.ms-2(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank", data-umami-event="Donate button") Buy me a beer 🍺
+
+        hr
+
+        h2 Basic
+
+        div.card.shadow
+            div.card-body
+                table.table.table-striped.align-middle
+                    thead
+                        tr
+                            th Url
+                            th.d-none.d-lg-table-cell Description
+                            th Example
+
+                    tbody
+                        tr
+                            td
+                                strong /cat
+                            td.d-none.d-lg-table-cell Will return a random cat
+                            td
+                                a(href="/cat", target="_blank").btn.btn-success Random cat
+
+                        tr
+                            td
+                                strong /cat/:tag
+                                br
+                                span.d-none.d-sm-inline /c/:tag
+                            td.d-none.d-lg-table-cell Will return a random cat with a #[code :tag]
+                            td
+                                a(href="/cat/cute", target="_blank").btn.btn-success Random cute cat
+
+                        tr
+                            td
+                                strong /cat/gif
+                                br
+                                span.d-none.d-sm-inline /c/gif
+                            td.d-none.d-lg-table-cell Will return a random gif cat \o/
+                            td
+                                a(href="/cat/gif", target="_blank").btn.btn-success Random gif cat
+
+                        tr
+                            td
+                                strong /cat/says/:text
+                                br
+                                span.d-none.d-sm-inline /c/s/:text
+                            td.d-none.d-lg-table-cell Will return a random cat saying #[code :text]
+                            td
+                                a(href="/cat/says/hello", target="_blank").btn.btn-success Random cat saying hello
+
+                        tr
+                            td
+                                strong /cat/:tag/says/:text
+                                br
+                                span.d-none.d-sm-inline /c/:tag/s/:text
+                            td.d-none.d-lg-table-cell Will return a random cat with a #[code :tag] and saying #[code :text]
+                            td
+                                a(href="/cat/cute/says/hello", target="_blank").btn.btn-success Random cute cat saying hello
+
+                        tr
+                            td
+                                strong /cat/says/:text?size=:size&color=:color
+                                br
+                                span.d-none.d-sm-inline /c/s/:text?s=:size&c=:color
+                            td.d-none.d-lg-table-cell Will return a random cat saying #[code :text] with text's #[code :size] and text's #[code :color]
+                            td
+                                a(href="/cat/says/hello?size=50&color=red", target="_blank").btn.btn-success Custom random cat saying hello
+
+        h2.mt-5 Advanced
+
+        div.card.shadow
+            div.card-body
+                table.table.table-striped.align-middle
+                    thead
+                        tr
+                            th Url
+                            th.d-none.d-lg-table-cell Description
+                            th Example
+
+                    tbody
+                        tr
+                            td
+                                strong /cat?type=:type
+                                br
+                                span.d-none.d-sm-inline /c?t=:type
+                            td.d-none.d-lg-table-cell Will return a random cat with image #[code :type] (small, medium, square or original)
+                            td
+                                a(href="/cat?type=sq", target="_blank").btn.btn-success Random cat with type
+
+                        tr
+                            td
+                                strong /cat?filter=:filter
+                                br
+                                span.d-none.d-sm-inline /c?fi=:filter
+                            td.d-none.d-lg-table-cell Will return a random cat with image filtered by #[code :filter] (blur, mono, sepia, negative, paint, pixel)
+                            td
+                                a(href="/cat?filter=sepia", target="_blank").btn.btn-success Random cat filtered
+
+                        tr
+                            td
+                                strong /cat?width=:width or /cat?height=:height
+                                br
+                                span.d-none.d-sm-inline /c?wi=:width or /c?he=:height
+                            td.d-none.d-lg-table-cell Will return a random cat with #[code :width] or #[code :height]
+                            td
+                                a(href="/cat?width=100", target="_blank").btn.btn-success Random cat with custom size
+
+                        tr
+                            td
+                                strong /cat?html=true
+                            td.d-none.d-lg-table-cell Will return a random cat in a HTML page, usefull for Twitter or Facebook embedded render
+                            td
+                                a(href="/cat?html=true", target="_blank").btn.btn-success Random cat in HTML
+
+                        tr
+                            td
+                                strong /cat?json=true
+                            td.d-none.d-lg-table-cell Will return a random cat in a JSON object
+                            td
+                                a(href="/cat?json=true", target="_blank").btn.btn-success Random cat in JSON
+
+                        tr
+                            td
+                                strong /c/gif/s/Hello?fi=sepia&c=orange&s=40&t=or
+                            td.d-none.d-lg-table-cell Mix 'em all :D
+                            td
+                                a(href="/cat/gif/says/Hello?filter=sepia&color=orange&size=40&type=or", target="_blank").btn.btn-success Combo
+
+        h2.mt-5 Get JSON data
+
+        div.card.shadow
+            div.card-body
+                table.table.table-striped.align-middle
+                    thead
+                        tr
+                            th Url
+                            th.d-none.d-lg-table-cell Description
+                            th Example
+
+                    tbody
+
+                        tr
+                            td
+                                strong /api/cats?tags=tag1,tag2&skip=0&limit=10
+                            td.d-none.d-lg-table-cell Will return all cats
+                            td
+                                a(href="/api/cats?tags=cute", target="_blank").btn.btn-success Get all cute cats
+
+                        tr
+                            td
+                                strong /api/tags
+                            td.d-none.d-lg-table-cell Will return all tags
+                            td
+                                a(href="/api/tags", target="_blank").btn.btn-success Get all tags

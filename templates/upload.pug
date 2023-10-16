@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    section.container.mt-4
+        header.mb-4
+            h1 Upload cats 🐱
+
+        div.card
+            div.card-body.shadow
+                if error
+                    p.alert.alert-danger= error
+
+                if ok
+                    p.alert.alert-success Your cat has been uploaded successfully!
+
+                form(method="post", enctype="multipart/form-data")
+                    div.mt-3
+                        label(for="file").form-label Select a cat
+                        input(type="file", name="file", id="file", accept="image/*", required).form-control
+
+                    div.mt-3
+                        label(for="tags").form-label Tags
+                        input(type="text", name="tags", id="tags", placeholder="cute, orange, ...", required).form-control
+                        div.form-text We recommend to use comma to separate tags
+
+                    div.mt-4
+                        button(type="submit").btn.btn-primary Upload

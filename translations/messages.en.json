@@ -1,0 +1,52 @@
+{
+  "home": "Home",
+  "hello_world": "Hello World",
+  "admin": "Administration",
+  "dashboard": "Dashboard",
+  "yes": "Yes",
+  "no": "No",
+  "delete_resource": "Delete resource",
+  "brand_name": "Cataas",
+  "image": "Image",
+  "validated": "Validated",
+  "tags": "Tags",
+  "edited_at": "Edited at",
+  "created_at": "Created at",
+  "cats": "Cats",
+
+  "actions": {
+    "sign_in": "Sign in",
+    "logout": "Logout",
+    "create": "Create",
+    "save": "Save",
+    "search": "Search",
+    "go_website": "Go website",
+    "go_homepage": "Go homepage",
+    "go_back": "Go back",
+    "edit": "Edit",
+    "delete": "Delete",
+    "show": "Show",
+    "up": "Up",
+    "down": "Down",
+    "validate": "Validate",
+    "submit": "Submit",
+    "previous": "Previous",
+    "next": "Next"
+  },
+
+  "form": {
+    "label": {
+      "username": "Username",
+      "password": "Password",
+      "remember_me": "Remember me"
+    },
+
+    "help": {
+    },
+
+    "placeholder": {
+      "username": "Type your username",
+      "password": "Type your password"
+    }
+  }
+}

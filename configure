@@ -1,0 +1,80 @@
+#!/bin/bash
+
+env=dev
+docker=false
+clean=false
+
+for arg in "$@"; do
+    case "$arg" in
+    --env=*)
+        env=`echo $arg | sed 's/--env=//'`
+    ;;
+
+    --with-docker)
+        docker=true
+    ;;
+
+    --clean-before-tasks)
+        clean=true
+    ;;
+
+    --help)
+        echo 'usage: ./configure [options]'
+        echo ''
+        echo 'options:'
+        echo '  --env=<env>: current env (dev|prod)'
+        echo '  --with-docker: enable docker'
+        echo '  --clean-before-tasks: remove build files'
+        echo ''
+        echo 'All invalid options are silently ignored!'
+        exit 0
+    ;;
+
+    esac
+done
+
+if [ $clean = true ]; then
+  echo "Clean old files"
+
+  preserve=(
+    .env
+    .env.dist
+    .gitignore
+    .mocharc.json
+    .releaserc.json
+    .eslintrc.json
+    configure
+    index.html
+    package.json
+    package-lock.json
+    README.md
+    server.js
+    webpack.config.js
+    vite.config.mjs
+    vite.config.js
+  )
+
+  find . -maxdepth 1 -type f $(for i in ${preserve[*]}; do echo "-not -name ${i}"; done) -exec rm -f "{}" \;
+fi
+
+echo "Generating files for $env environment..."
+
+if  [ -d "./infrastructure/$env" ]; then
+  cp -rT ./infrastructure/$env/autoconf/ ./
+fi
+
+if [ $docker = true ]; then
+  echo "Add docker files!"
+  cp ./infrastructure/docker/$env/autoconf/Dockerfile.dist ./Dockerfile
+  cp ./infrastructure/docker/$env/autoconf/docker-compose.yaml.dist ./docker-compose.yaml
+  cp ./infrastructure/docker/$env/autoconf/.dockerignore ./.dockerignore
+  cp ./infrastructure/docker/$env/autoconf/Makefile.dist ./
+fi
+
+if [ $env = prod ]; then
+  echo "Damn! production"
+fi
+
+mv ./Makefile.dist ./Makefile
+
+echo 'Configuration complete'
