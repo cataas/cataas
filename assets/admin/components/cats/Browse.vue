@@ -6,7 +6,7 @@ import DropdownAction from "@admin/components/ui/dropdown/DropdownAction.vue";
 
 import useCatsStore from '../../stores/cats'
 
-const { remove, validate } = useCatsStore()
+const { remove, validate, edit } = useCatsStore()
 
 const requester = inject('requester')
 const { items } = defineProps({
@@ -18,7 +18,7 @@ const { items } = defineProps({
 const editTags = (event, item) => {
     const tags = event.target.elements.tags.value;
 
-    remove(item, tags)
+    edit(item, tags)
 }
 </script>
 
