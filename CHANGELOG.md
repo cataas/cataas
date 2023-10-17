@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/cataas/cataas/compare/v1.0.1...v1.0.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* Admin edit cat ([e5b834e](https://github.com/cataas/cataas/commit/e5b834e3b326d4dd6581b90e79c7969c104abfdd))
+
 ## [1.0.1](https://github.com/cataas/cataas/compare/v1.0.0...v1.0.1) (2023-10-16)
 
 
