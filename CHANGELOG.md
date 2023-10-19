@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/cataas/cataas/compare/v1.0.3...v1.0.4) (2023-10-19)
+
+
+### Bug Fixes
+
+* Catch error for analytics ([9e5dec2](https://github.com/cataas/cataas/commit/9e5dec2c9f9c23838aab2e9ef485cc6b9b9b3817))
+
 ## [1.0.3](https://github.com/cataas/cataas/compare/v1.0.2...v1.0.3) (2023-10-19)
 
 
