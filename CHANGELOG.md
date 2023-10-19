@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/cataas/cataas/compare/v1.0.2...v1.0.3) (2023-10-19)
+
+
+### Bug Fixes
+
+* hue and lightness default values ([8fd2356](https://github.com/cataas/cataas/commit/8fd23567e3a344ee3aca9a49b72a6547bd7ecabd))
+
 ## [1.0.2](https://github.com/cataas/cataas/compare/v1.0.1...v1.0.2) (2023-10-17)
 
 
