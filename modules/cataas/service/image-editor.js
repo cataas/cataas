@@ -34,8 +34,8 @@ class ImageEditor {
       b,
       brightness = 1,
       saturation = 1,
-      hue,
-      lightness,
+      hue = 0,
+      lightness = 0,
       blur
     }
   ) {
