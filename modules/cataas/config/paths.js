@@ -1,42 +1,129 @@
 const apiConfigGenerator = require('../../../src/shared/api/config-generator')
 
+const parameters = [
+  {
+    name: 'type',
+    in: 'query',
+    schema: { type: 'string', enum: ['square', 'medium', 'small', 'xsmall'] }
+  },
+  {
+    name: 'filter',
+    in: 'query',
+    schema: { type: 'string', enum: ['mono', 'negate', 'custom'] }
+  },
+  {
+    name: 'fit',
+    in: 'query',
+    schema: { type: 'string', enum: ['cover', 'contain', 'fill', 'inside', 'outside'] }
+  },
+  {
+    name: 'position',
+    in: 'query',
+    schema: { type: 'string', default: 'center', enum: ['top', 'right top', 'right', 'right bottom', 'bottom', 'left bottom', 'left', 'left top', 'centre'] }
+  },
+  {
+    name: 'width',
+    in: 'query',
+    schema: { type: 'integer' }
+  },
+  {
+    name: 'height',
+    in: 'query',
+    schema: { type: 'integer' }
+  },
+  {
+    name: 'blur',
+    in: 'query',
+    schema: { type: 'integer' }
+  },
+  {
+    name: 'r',
+    in: 'query',
+    schema: { type: 'integer' },
+    description: 'Red'
+  },
+  {
+    name: 'g',
+    in: 'query',
+    schema: { type: 'integer' },
+    description: 'Green'
+  },
+  {
+    name: 'b',
+    in: 'query',
+    schema: { type: 'integer' },
+    description: 'Blue'
+  },
+  {
+    name: 'brightness',
+    in: 'query',
+    schema: { type: 'number', format: 'float' },
+    description: 'Brightness multiplier'
+  },
+  {
+    name: 'saturation',
+    in: 'query',
+    schema: { type: 'number', format: 'float' },
+    description: 'Saturation multiplier'
+  },
+  {
+    name: 'hue',
+    in: 'query',
+    schema: { type: 'integer' },
+    description: 'Hue rotation in degrees'
+  },
+  {
+    name: 'lightness',
+    in: 'query',
+    schema: { type: 'integer' },
+    description: 'Lightness addend'
+  },
+  {
+    name: 'html',
+    in: 'query',
+    schema: { type: 'boolean' }
+  },
+  {
+    name: 'json',
+    in: 'query',
+    schema: { type: 'boolean' }
+  }
+]
+
+const textParameters = [
+  {
+    name: 'font',
+    in: 'query',
+    schema: { type: 'string', default: 'Impact', enum: ['Andale Mono', 'Impact', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Georgia', 'Times New Roman', 'Verdana', 'Webdings'] }
+  },
+  {
+    name: 'fontSize',
+    in: 'query',
+    schema: { type: 'integer', default: 30 }
+  },
+  {
+    name: 'fontColor',
+    in: 'query',
+    schema: { type: 'string', default: '#000' }
+  },
+  {
+    name: 'fontBackground',
+    in: 'query',
+    schema: { type: 'string', default: 'none' }
+  },
+  /*{
+    name: 'fontPosition',
+    in: 'query',
+    schema: { type: 'string', default: 'south', enum: ['north', 'northeast', 'east', 'southeast', 'south', 'southwest', 'west', 'northwest', 'center'] }
+  }*/
+]
+
 apiConfigGenerator.addPath('/cat', {
   operationId: 'cat:random',
   method: 'get',
   tags: ['Cats'],
   description: 'Get a random cat',
-  parameters: [
-    {
-      name: 'type',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'filter',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'width',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'height',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'html',
-      in: 'query',
-      schema: { type: 'boolean' }
-    },
-    {
-      name: 'json',
-      in: 'query',
-      schema: { type: 'boolean' }
-    }
-  ],
+  parameters,
   responses: {
     200: {
       description: 'Cat returned'
@@ -56,36 +143,7 @@ apiConfigGenerator.addPath('/cat/{id}', {
       schema: { type: 'string' },
       required: true
     },
-    {
-      name: 'type',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'filter',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'width',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'height',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'html',
-      in: 'query',
-      schema: { type: 'boolean' }
-    },
-    {
-      name: 'json',
-      in: 'query',
-      schema: { type: 'boolean' }
-    }
+    ...parameters
   ],
   responses: {
     200: {
@@ -109,36 +167,7 @@ apiConfigGenerator.addPath('/cat/{tag}', {
       schema: { type: 'string' },
       required: true
     },
-    {
-      name: 'type',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'filter',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'width',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'height',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'html',
-      in: 'query',
-      schema: { type: 'boolean' }
-    },
-    {
-      name: 'json',
-      in: 'query',
-      schema: { type: 'boolean' }
-    }
+    ...parameters
   ],
   responses: {
     200: {
@@ -159,36 +188,8 @@ apiConfigGenerator.addPath('/cat/says/{text}', {
       schema: { type: 'string' },
       required: true
     },
-    {
-      name: 'type',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'filter',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'width',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'height',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'html',
-      in: 'query',
-      schema: { type: 'boolean' }
-    },
-    {
-      name: 'json',
-      in: 'query',
-      schema: { type: 'boolean' }
-    }
+    ...textParameters,
+    ...parameters
   ],
   responses: {
     200: {
@@ -215,36 +216,8 @@ apiConfigGenerator.addPath('/cat/{id}/says/{text}', {
       schema: { type: 'string' },
       required: true
     },
-    {
-      name: 'type',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'filter',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'width',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'height',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'html',
-      in: 'query',
-      schema: { type: 'boolean' }
-    },
-    {
-      name: 'json',
-      in: 'query',
-      schema: { type: 'boolean' }
-    }
+    ...textParameters,
+    ...parameters
   ],
   responses: {
     200: {
@@ -274,36 +247,8 @@ apiConfigGenerator.addPath('/cat/{tag}/says/{text}', {
       schema: { type: 'string' },
       required: true
     },
-    {
-      name: 'type',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'filter',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'width',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'height',
-      in: 'query',
-      schema: { type: 'string' }
-    },
-    {
-      name: 'html',
-      in: 'query',
-      schema: { type: 'boolean' }
-    },
-    {
-      name: 'json',
-      in: 'query',
-      schema: { type: 'boolean' }
-    }
+    ...textParameters,
+    ...parameters
   ],
   responses: {
     200: {

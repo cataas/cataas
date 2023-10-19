@@ -6,6 +6,9 @@ RUN apk add --upgrade --no-cache bash
 RUN apk add --upgrade --no-cache gcompat
 RUN apk add --update graphicsmagick
 
+RUN apk add --upgrade --no-cache msttcorefonts-installer
+RUN update-ms-fonts
+
 RUN mkdir -p /home/app
 WORKDIR /home/app
 

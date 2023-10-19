@@ -1,6 +1,8 @@
+const fs = require('fs')
 const { createHash } = require('crypto')
 const store = require('../../src/shared/store/datastore')
-const imageEditor = require('cataas-image-editor')
+const imageEditor = require('./service/image-editor')
+const sharp = require('sharp')
 
 module.exports = {
   async findCat ({ id, tag, text }) {
@@ -65,33 +67,32 @@ module.exports = {
   },
 
   async editImage (req, buffer, mimetype) {
-    const text = req.params.text ? decodeURIComponent(req.params.text) : ''
-    const color = req.query.color || '#ffffff'
-    let size = req.query.size || 30
-    let type = req.query.type || 'default'
-    const filter = req.query.filter || null
-    let width = req.query.width || null
-    let height = req.query.height || null
-    const gravity = req.query.gravity || 'Center'
+    const text = req.params.text ? decodeURIComponent(req.params.text) : null
 
-    if (width !== null) {
+    let size = req.query.size
+    let width = req.query.width
+    let height = req.query.height
+
+    if (width) {
+      width = parseInt(width)
       width = width <= 1000 ? width : 1000
     }
 
-    if (height !== null) {
+    if (height) {
+      height = parseInt(height)
       height = height <= 1000 ? height : 1000
     }
 
-    if (size !== null) {
+    if (size) {
+      size = parseInt(size)
       size = size <= 100 ? size : 100
     }
 
-    // Don't resize gif if there are no type selected or custom width / height
-    if (mimetype === 'image/gif' && type === 'default' && width === null && height === null) {
-      type = 'original'
-    }
-
-    return imageEditor.edit(buffer, mimetype, type, text, color, size, filter, width, height, gravity)
+    return imageEditor.edit(
+      buffer,
+      mimetype,
+      { text, ...req.query, size, width, height }
+    )
   },
 
   getUrl (tag = null, text = null, queries = {}, id = null) {
@@ -144,21 +145,22 @@ module.exports = {
   async createCat ({ file, tags }) {
     tags = tags.split(',').map(tag => tag.trim())
 
-    let buffer = await imageEditor.readFile(file.filepath)
-    const { sizes } = await imageEditor.size(buffer)
-    const { width, height } = sizes
+    const isGif = file.mimeType === 'image/gif'
+
+    const buffer = fs.readFileSync(file.filepath)
+    const image = sharp(buffer, { animated: isGif })
+    const { width, height } = await image.metadata()
 
     let resizeWidthTo = null
     let resizeHeightTo = null
-
     if (width > height && width > 1280) {
       resizeWidthTo = 1280
     } else if (height > width && height > 1280) {
       resizeHeightTo = 1280
     }
 
-    if (resizeWidthTo || resizeHeightTo) {
-      buffer = await imageEditor.resize(buffer, resizeWidthTo, resizeHeightTo)
+    if (!isGif && (resizeWidthTo || resizeHeightTo)) {
+      await image.resize({ width: resizeWidthTo, height: resizeHeightTo })
     }
 
     const ext = file.filename.split('.').pop()
@@ -166,7 +168,7 @@ module.exports = {
     const hash = hashFunction.update(file.filename).digest('hex')
     const filename = `${hash}.${ext}`
 
-    await imageEditor.writeFile(buffer, `${__dirname}/../../data/images/${filename}`)
+    await image.toFile(`${__dirname}/../../data/images/${filename}`)
 
     return await store.insert('cats', {
       tags,

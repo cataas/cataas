@@ -89,6 +89,10 @@ module.exports = app => {
   })
 
   app.post('/upload', async (req, res) => {
+    if (!req.body.file.mimeType.match(/image\/*/)) {
+      return res.render('upload', { error: 'Only images are allowed' })
+    }
+
     try {
       await createCat(req.body)
     } catch (e) {

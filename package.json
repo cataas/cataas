@@ -21,7 +21,6 @@
     "@boutdecode/session": "^1.1.0",
     "@tamia-web/doc-plugin": "^0.1.2",
     "@tamia-web/tamia": "^2.0.0",
-    "cataas-image-editor": "^0.4.0",
     "dotenv": "^16.3.1",
     "install": "^0.13.0",
     "intl": "^1.2.5",

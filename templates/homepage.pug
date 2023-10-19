@@ -44,8 +44,6 @@ block content
                         tr
                             td
                                 strong /cat/:tag
-                                br
-                                span.d-none.d-sm-inline /c/:tag
                             td.d-none.d-lg-table-cell Will return a random cat with a #[code :tag]
                             td
                                 a(href="/cat/cute", target="_blank").btn.btn-success Random cute cat
@@ -53,8 +51,6 @@ block content
                         tr
                             td
                                 strong /cat/gif
-                                br
-                                span.d-none.d-sm-inline /c/gif
                             td.d-none.d-lg-table-cell Will return a random gif cat \o/
                             td
                                 a(href="/cat/gif", target="_blank").btn.btn-success Random gif cat
@@ -62,8 +58,6 @@ block content
                         tr
                             td
                                 strong /cat/says/:text
-                                br
-                                span.d-none.d-sm-inline /c/s/:text
                             td.d-none.d-lg-table-cell Will return a random cat saying #[code :text]
                             td
                                 a(href="/cat/says/hello", target="_blank").btn.btn-success Random cat saying hello
@@ -71,20 +65,16 @@ block content
                         tr
                             td
                                 strong /cat/:tag/says/:text
-                                br
-                                span.d-none.d-sm-inline /c/:tag/s/:text
                             td.d-none.d-lg-table-cell Will return a random cat with a #[code :tag] and saying #[code :text]
                             td
                                 a(href="/cat/cute/says/hello", target="_blank").btn.btn-success Random cute cat saying hello
 
                         tr
                             td
-                                strong /cat/says/:text?size=:size&color=:color
-                                br
-                                span.d-none.d-sm-inline /c/s/:text?s=:size&c=:color
-                            td.d-none.d-lg-table-cell Will return a random cat saying #[code :text] with text's #[code :size] and text's #[code :color]
+                                strong /cat/says/:text?fontSize=:size&fontColor=:color
+                            td.d-none.d-lg-table-cell Will return a random cat saying #[code :text] with text's #[code :fontSize] and text's #[code :fontColor]
                             td
-                                a(href="/cat/says/hello?size=50&color=red", target="_blank").btn.btn-success Custom random cat saying hello
+                                a(href="/cat/says/hello?fontSize=50&fontColor=red", target="_blank").btn.btn-success Custom random cat saying hello
 
         h2.mt-5 Advanced
 
@@ -101,26 +91,34 @@ block content
                         tr
                             td
                                 strong /cat?type=:type
-                                br
-                                span.d-none.d-sm-inline /c?t=:type
-                            td.d-none.d-lg-table-cell Will return a random cat with image #[code :type] (small, medium, square or original)
+                            td.d-none.d-lg-table-cell Will return a random cat with image #[code :type] (xsmall, small, medium or square)
                             td
-                                a(href="/cat?type=sq", target="_blank").btn.btn-success Random cat with type
+                                a(href="/cat?type=square", target="_blank").btn.btn-success Random cat with type
 
                         tr
                             td
                                 strong /cat?filter=:filter
-                                br
-                                span.d-none.d-sm-inline /c?fi=:filter
-                            td.d-none.d-lg-table-cell Will return a random cat with image filtered by #[code :filter] (blur, mono, sepia, negative, paint, pixel)
+                            td.d-none.d-lg-table-cell Will return a random cat with image filtered by #[code :filter] (blur, mono, negate or custom)
                             td
-                                a(href="/cat?filter=sepia", target="_blank").btn.btn-success Random cat filtered
+                                a(href="/cat?filter=mono", target="_blank").btn.btn-success Random cat filtered
+
+                        tr
+                            td
+                                strong /cat?filter=custom&brightness=:brightness&lightness=:lightness&saturation=:saturation&hue=:hue
+                            td.d-none.d-lg-table-cell Will return a random cat with image filtered by #[code :brightness], #[code :lightness], #[code :saturation] and #[code :hue]
+                            td
+                                a(href="/cat?filter=custom&brightness=1.5&saturation=50", target="_blank").btn.btn-success Random cat filtered
+
+                        tr
+                            td
+                                strong /cat?filter=custom&r=:red&g=:green&b=:blue
+                            td.d-none.d-lg-table-cell Will return a random cat with image filtered by #[code :red], #[code :green] and #[code :blue]
+                            td
+                                a(href="/cat?filter=custom&r=7&g=12&b=50", target="_blank").btn.btn-success Random cat filtered
 
                         tr
                             td
                                 strong /cat?width=:width or /cat?height=:height
-                                br
-                                span.d-none.d-sm-inline /c?wi=:width or /c?he=:height
                             td.d-none.d-lg-table-cell Will return a random cat with #[code :width] or #[code :height]
                             td
                                 a(href="/cat?width=100", target="_blank").btn.btn-success Random cat with custom size
@@ -141,10 +139,10 @@ block content
 
                         tr
                             td
-                                strong /c/gif/s/Hello?fi=sepia&c=orange&s=40&t=or
+                                strong /cat/gif/says/Hello?filter=mono&fontColor=orange&fontSize=20&type=square
                             td.d-none.d-lg-table-cell Mix 'em all :D
                             td
-                                a(href="/cat/gif/says/Hello?filter=sepia&color=orange&size=40&type=or", target="_blank").btn.btn-success Combo
+                                a(href="/cat/gif/says/Hello?filter=mono&fontColor=orange&fontSize=20&type=square", target="_blank").btn.btn-danger Combo
 
         h2.mt-5 Get JSON data
 

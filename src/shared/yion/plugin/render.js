@@ -27,10 +27,10 @@ module.exports = {
         return res.routeMatched
       },
 
-      get analytics() {
+      get analytics () {
         return {
           url: `${config.get('analytics.url')}/script.js`,
-          websiteId: config.get('analytics.websiteId'),
+          websiteId: config.get('analytics.websiteId')
         }
       },
 
