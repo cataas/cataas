@@ -1,3 +1,4 @@
+const fetch = require('node-fetch')
 const config = require('../../src/shared/configuration/configurator')
 
 module.exports = {
