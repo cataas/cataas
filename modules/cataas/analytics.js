@@ -3,7 +3,7 @@ const config = require('../../src/shared/configuration/configurator')
 
 module.exports = {
   sendAnalytic (req) {
-    if (req.headers['user-agent']) {
+    /*if (req.headers['user-agent']) {
       try {
         fetch('https://analytics.boutdecode.fr/api/send', {
           method: 'POST',
@@ -24,6 +24,6 @@ module.exports = {
       } catch (e) {
         console.error(e)
       }
-    }
+    }*/
   }
 }
