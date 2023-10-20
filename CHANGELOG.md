@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/cataas/cataas/compare/v1.0.4...v1.0.5) (2023-10-20)
+
+
+### Bug Fixes
+
+* Use node-fetch instead of fetch ([6f43e38](https://github.com/cataas/cataas/commit/6f43e38446c39dd736e138539df3a1518f5fcdf9))
+
 ## [1.0.4](https://github.com/cataas/cataas/compare/v1.0.3...v1.0.4) (2023-10-19)
 
 
