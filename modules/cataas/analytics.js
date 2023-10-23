@@ -2,10 +2,10 @@ const fetch = require('node-fetch')
 const config = require('../../src/shared/configuration/configurator')
 
 module.exports = {
-  sendAnalytic (req) {
+  async sendAnalytic (req) {
     if (req.headers['user-agent']) {
       try {
-        fetch('https://analytics.boutdecode.fr/api/send', {
+        await fetch('https://analytics.boutdecode.fr/api/send', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
