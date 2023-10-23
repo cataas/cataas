@@ -1,3 +1,22 @@
+# [2.0.0](https://github.com/cataas/cataas/compare/v1.0.5...v2.0.0) (2023-10-23)
+
+
+### Bug Fixes
+
+* Analytics send ([24e51c7](https://github.com/cataas/cataas/commit/24e51c7d5beb17a2c119972305a9937812a2bdb4))
+* Disable analytics ([53c1043](https://github.com/cataas/cataas/commit/53c10438ec2997c795b2d11b263da8981eb89c1d))
+* Disable analytics ([a41fc81](https://github.com/cataas/cataas/commit/a41fc81ca3106eda7bc03515b4ed5da9017f5836))
+
+
+### Features
+
+* Release 2.0.0 ([cb75c70](https://github.com/cataas/cataas/commit/cb75c70107d9664a4cbd855e3b805804fc5da55e))
+
+
+### BREAKING CHANGES
+
+* New image editor
+
 ## [1.0.6](https://github.com/cataas/cataas/compare/v1.0.5...v1.0.6) (2023-10-23)
 
 
