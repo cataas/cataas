@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/cataas/cataas/compare/v2.0.0...v2.0.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* Analytics request ([8db69a4](https://github.com/cataas/cataas/commit/8db69a44aa2252120845f9474c46b245f552c422))
+
 # [2.0.0](https://github.com/cataas/cataas/compare/v1.0.5...v2.0.0) (2023-10-23)
 
 
