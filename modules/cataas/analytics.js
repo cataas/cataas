@@ -23,8 +23,6 @@ module.exports = {
             type: 'event'
           })
         })
-
-        console.log(response.status, response.statusText, await response.text())
       } catch (e) {
         console.error(e)
       }
