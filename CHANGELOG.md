@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/cataas/cataas/compare/v2.0.3...v2.0.4) (2023-10-30)
+
+
+### Bug Fixes
+
+* Add error log ([c680c0b](https://github.com/cataas/cataas/commit/c680c0bc164eb2fa78d66bf755e6ded01c32c626))
+
 ## [2.0.3](https://github.com/cataas/cataas/compare/v2.0.2...v2.0.3) (2023-10-30)
 
 
