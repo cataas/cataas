@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/cataas/cataas/compare/v2.0.2...v2.0.3) (2023-10-30)
+
+
+### Bug Fixes
+
+* Delete cat image ([5c1ed55](https://github.com/cataas/cataas/commit/5c1ed55c76a54b6f49c1bc90dbfbe585aea65c48))
+
 ## [2.0.2](https://github.com/cataas/cataas/compare/v2.0.1...v2.0.2) (2023-10-24)
 
 
