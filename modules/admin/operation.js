@@ -30,7 +30,9 @@ module.exports = {
       throw new Error('Cat not found')
     }
 
-    fs.unlinkSync(`${__dirname}/../../data/images/${cat.file}`)
+    if (fs.existsSync(`${__dirname}/../../data/images/${cat.file}`)) {
+      fs.unlinkSync(`${__dirname}/../../data/images/${cat.file}`)
+    }
 
     return await store.remove('cats', { _id: id })
   }

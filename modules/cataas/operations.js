@@ -1,8 +1,8 @@
 const fs = require('fs')
-const { createHash } = require('crypto')
 const store = require('../../src/shared/store/datastore')
 const imageEditor = require('./service/image-editor')
 const sharp = require('sharp')
+const { randomUUID } = require('node:crypto')
 
 module.exports = {
   async findCat ({ id, tag, text }) {
@@ -164,9 +164,7 @@ module.exports = {
     }
 
     const ext = file.filename.split('.').pop()
-    const hashFunction = createHash('md5')
-    const hash = hashFunction.update(file.filename).digest('hex')
-    const filename = `${hash}.${ext}`
+    const filename = `${randomUUID()}.${ext}`
 
     await image.toFile(`${__dirname}/../../data/images/${filename}`)
 
