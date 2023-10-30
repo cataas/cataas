@@ -52,8 +52,11 @@ module.exports = app => {
 
       res.write(buffer)
       res.end()
-    } catch ({ message, code }) {
-      res.send({ code, message }, code || 500)
+    } catch (error) {
+      const { message, code } = error
+
+      console.error(error)
+      res.send({ code, message }, 500)
     }
   }
 
