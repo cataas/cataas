@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/cataas/cataas/compare/v2.0.5...v2.0.6) (2024-03-27)
+
+
+### Bug Fixes
+
+* Send JSON for Accept application/json ([965caa2](https://github.com/cataas/cataas/commit/965caa2c3172bffbf3a30f761a251a0d9879476b))
+
 ## [2.0.5](https://github.com/cataas/cataas/compare/v2.0.4...v2.0.5) (2024-03-27)
 
 
