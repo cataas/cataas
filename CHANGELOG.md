@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/cataas/cataas/compare/v2.0.4...v2.0.5) (2024-03-27)
+
+
+### Bug Fixes
+
+* Divers ([5487087](https://github.com/cataas/cataas/commit/5487087472fe10ff5a752dae15a0a78085266f39))
+
 ## [2.0.4](https://github.com/cataas/cataas/compare/v2.0.3...v2.0.4) (2023-10-30)
 
 
