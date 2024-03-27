@@ -15,7 +15,7 @@ module.exports = app => {
       return res.send('Cat not found', 404)
     }
 
-    if (json || req.headers?.accept.match(/application\/json/)) {
+    if (json || (req.headers.accept && req.headers.accept.match(/application\/json/))) {
       delete cat.owner
       delete cat.validated
       delete cat.file
@@ -23,7 +23,7 @@ module.exports = app => {
       return res.json(cat)
     }
 
-    if (html || req.headers?.accept.match(/text\/html/)) {
+    if (html) {
       const template = `
         <!DOCTYPE html>
         <html lang="en">
