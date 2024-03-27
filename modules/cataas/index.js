@@ -15,7 +15,7 @@ module.exports = app => {
       return res.send('Cat not found', 404)
     }
 
-    if (json) {
+    if (json || req.headers?.accept.match(/application\/json/)) {
       delete cat.owner
       delete cat.validated
       delete cat.file
@@ -23,12 +23,21 @@ module.exports = app => {
       return res.json(cat)
     }
 
-    if (html) {
+    if (html || req.headers?.accept.match(/text\/html/)) {
       const template = `
         <!DOCTYPE html>
         <html lang="en">
             <header>
+                <title>Cat as a service (CATAAS)</title>
                 <meta charset="utf-8">
+                <meta name="description" content="Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.">
+                <meta name="author" content="Kevin Balicot">
+
+                <meta property="og:title" content="Cat as a service (CATAAS)">
+                <meta property="og:description" content="Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.">
+                <meta property="og:url" content="https://cataas.com">
+                <meta property="og:image" content="${getUrl(req.params.tag, req.params.text, req.query, cat._id)}">
+                <meta property="og:type" content="website">
             </header>
             <body>
                 <img alt="${cat._id}" src="${getUrl(req.params.tag, req.params.text, req.query, cat._id)}">

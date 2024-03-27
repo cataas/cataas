@@ -19,7 +19,7 @@ const parameters = [
   {
     name: 'position',
     in: 'query',
-    schema: { type: 'string', default: 'center', enum: ['top', 'right top', 'right', 'right bottom', 'bottom', 'left bottom', 'left', 'left top', 'centre'] }
+    schema: { type: 'string', default: 'center', enum: ['top', 'right top', 'right', 'right bottom', 'bottom', 'left bottom', 'left', 'left top', 'center'] }
   },
   {
     name: 'width',

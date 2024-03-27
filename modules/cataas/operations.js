@@ -96,7 +96,7 @@ module.exports = {
   },
 
   getUrl (tag = null, text = null, queries = {}, id = null) {
-    let url = '/cat'
+    let url = `${process.env.HOST}/cat`
     const q = []
 
     if (id) {
