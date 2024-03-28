@@ -20,6 +20,12 @@ block content
             | Hey ! Do you like Cataas? Do you want to support the project ?
             a.btn.btn-primary.ms-2(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank", data-umami-event="Donate button") Buy me a beer 🍺
 
+        .alert.alert-info
+            p Hey cat lovers, new major version of cataas :
+            ul
+                li Now JSON will returns if request contain #[code application/json] header, API doc updated #[a(href="/doc.html", target="_blank") here]
+                li Fix tags search and fix tags combined with #[code ","] separator (see documentation)
+
         hr
 
         h2 Basic
@@ -44,9 +50,9 @@ block content
                         tr
                             td
                                 strong /cat/:tag
-                            td.d-none.d-lg-table-cell Will return a random cat with a #[code :tag]
+                            td.d-none.d-lg-table-cell Will return a random cat with a #[code :tag], You can combine multiple tags with #[code :tag] separator
                             td
-                                a(href="/cat/cute", target="_blank").btn.btn-success Random cute cat
+                                a(href="/cat/orange,cute", target="_blank").btn.btn-success Random orange cute cat
 
                         tr
                             td

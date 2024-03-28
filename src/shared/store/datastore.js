@@ -117,7 +117,7 @@ module.exports = {
    * @param {object} sort
    * @returns {Promise<*>}
    */
-  find (collection, query = {}, limit = -1, skip = 0, sort = { createdAt: -1 }) {
+  find (collection, query = {}, limit = 1, skip = 0, sort = { createdAt: -1 }) {
     return new Promise((resolve, reject) => {
       getCollection(collection).find(query).sort(sort).limit(limit).skip(skip).exec((err, result) => {
         if (err) {

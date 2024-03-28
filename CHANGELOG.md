@@ -1,3 +1,17 @@
+## [2.1.1](https://github.com/cataas/cataas/compare/v2.1.0...v2.1.1) (2024-03-28)
+
+
+### Bug Fixes
+
+* Fix mongodb client ([7552f1f](https://github.com/cataas/cataas/commit/7552f1f7037c9aecbe63ba8f422be55707630ccf))
+
+# [2.1.0](https://github.com/cataas/cataas/compare/v2.0.6...v2.1.0) (2024-03-28)
+
+
+### Features
+
+* Release 2.1 ([84e4e0b](https://github.com/cataas/cataas/commit/84e4e0b3ec48799cad9a010296aee4f4252eff66))
+
 ## [2.0.6](https://github.com/cataas/cataas/compare/v2.0.5...v2.0.6) (2024-03-27)
 
 

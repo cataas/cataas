@@ -4,6 +4,10 @@ const imageEditor = require('./service/image-editor')
 const sharp = require('sharp')
 const { randomUUID } = require('node:crypto')
 
+function random(min, max) {
+  return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
+}
+
 module.exports = {
   async findCat ({ id, tag, text }) {
     const params = { validated: true }
@@ -22,12 +26,15 @@ module.exports = {
         return query
       }, [])
 
-      const result = await store.find('cats', { $and: query, ...params })
-      cat = result[Math.floor(Math.random() * result.length)]
+      const search = { $and: query, ...params }
+      const count = await store.count('cats', search)
+      cat = await store.find('cats', search, 1, random(0, count - 1))
+      cat = cat[0]
     } else {
-      const result = await store.find('cats', params)
-      const notGif = result.filter(({ mimetype }) => mimetype !== 'image/gif')
-      cat = notGif[Math.floor(Math.random() * notGif.length)]
+      const search = { mimetype: { $ne: 'image/gif' }, ...params }
+      const count = await store.count('cats', search)
+      cat = await store.find('cats', search, 1, random(0, count - 1))
+      cat = cat[0]
     }
 
     return cat
