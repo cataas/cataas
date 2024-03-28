@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/cataas/cataas/compare/v2.1.1...v2.1.2) (2024-03-28)
+
+
+### Bug Fixes
+
+* Search cat with tags ([a125edb](https://github.com/cataas/cataas/commit/a125edb528312b4b50c4e1a4aef60cd82e452516))
+
 ## [2.1.1](https://github.com/cataas/cataas/compare/v2.1.0...v2.1.1) (2024-03-28)
 
 
