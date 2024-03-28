@@ -4,6 +4,12 @@ const imageEditor = require('./service/image-editor')
 const sharp = require('sharp')
 const { randomUUID } = require('node:crypto')
 
+function random(min, max) {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
 module.exports = {
   async findCat ({ id, tag, text }) {
     const params = { validated: true }
@@ -14,7 +20,7 @@ module.exports = {
     if (id && id.match(/\w{16}/)) {
       cat = await store.findOne('cats', { _id: id, ...params })
     } else if (id) {
-      tag = id
+      tag = decodeURIComponent(id)
 
       const query = tag.split(',').reduce((query, tags) => {
         query.push({ tags })
@@ -22,12 +28,13 @@ module.exports = {
         return query
       }, [])
 
-      const result = await store.find('cats', { $and: query, ...params })
-      cat = result[Math.floor(Math.random() * result.length)]
+      const count = await store.count('cats', { $and: query, ...params })
+      cat = await store.find('cats', { $and: query, ...params }, 1, random(0, count - 1))
+      cat = cat[0]
     } else {
-      const result = await store.find('cats', params)
-      const notGif = result.filter(({ mimetype }) => mimetype !== 'image/gif')
-      cat = notGif[Math.floor(Math.random() * notGif.length)]
+      const count = await store.count('cats', params)
+      cat = await store.find('cats', params, 1, random(0, count - 1))
+      cat = cat[0]
     }
 
     return cat

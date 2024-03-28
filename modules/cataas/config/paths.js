@@ -126,7 +126,15 @@ apiConfigGenerator.addPath('/cat', {
   parameters,
   responses: {
     200: {
-      description: 'Cat returned'
+      description: 'Cat returned',
+      content: {
+        'image/*': {
+          schema: { type: 'string', format: 'binary'}
+        },
+        'application/json': {
+          schema: { $ref: '#/components/schemas/Cat' }
+        }
+      }
     }
   }
 })
@@ -147,7 +155,15 @@ apiConfigGenerator.addPath('/cat/{id}', {
   ],
   responses: {
     200: {
-      description: 'Cat returned'
+      description: 'Cat returned',
+      content: {
+        'image/*': {
+          schema: { type: 'string', format: 'binary'}
+        },
+        'application/json': {
+          schema: { $ref: '#/components/schemas/Cat' }
+        }
+      }
     },
     404: {
       description: 'Cat not found'
@@ -171,7 +187,15 @@ apiConfigGenerator.addPath('/cat/{tag}', {
   ],
   responses: {
     200: {
-      description: 'Cat returned'
+      description: 'Cat returned',
+      content: {
+        'image/*': {
+          schema: { type: 'string', format: 'binary'}
+        },
+        'application/json': {
+          schema: { $ref: '#/components/schemas/Cat' }
+        }
+      }
     }
   }
 })
@@ -193,7 +217,15 @@ apiConfigGenerator.addPath('/cat/says/{text}', {
   ],
   responses: {
     200: {
-      description: 'Cat returned'
+      description: 'Cat returned',
+      content: {
+        'image/*': {
+          schema: { type: 'string', format: 'binary'}
+        },
+        'application/json': {
+          schema: { $ref: '#/components/schemas/Cat' }
+        }
+      }
     }
   }
 })
@@ -221,7 +253,15 @@ apiConfigGenerator.addPath('/cat/{id}/says/{text}', {
   ],
   responses: {
     200: {
-      description: 'Cat returned'
+      description: 'Cat returned',
+      content: {
+        'image/*': {
+          schema: { type: 'string', format: 'binary'}
+        },
+        'application/json': {
+          schema: { $ref: '#/components/schemas/Cat' }
+        }
+      }
     },
     404: {
       description: 'Cat not found'
@@ -252,7 +292,15 @@ apiConfigGenerator.addPath('/cat/{tag}/says/{text}', {
   ],
   responses: {
     200: {
-      description: 'Cat returned'
+      description: 'Cat returned',
+      content: {
+        'image/*': {
+          schema: { type: 'string', format: 'binary'}
+        },
+        'application/json': {
+          schema: { $ref: '#/components/schemas/Cat' }
+        }
+      }
     }
   }
 })
