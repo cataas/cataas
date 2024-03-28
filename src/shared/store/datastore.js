@@ -1,7 +1,5 @@
 const { MongoClient } = require('mongodb')
 
-const client = new MongoClient(process.env.DB_URL)
-
 module.exports = {
   /**
    * Insert document into collection
@@ -9,8 +7,15 @@ module.exports = {
    * @param {object} data
    * @returns {Promise<*>}
    */
-  insert (collection, data) {
-    return client.db(process.env.DB_NAME).collection(collection).insertOne(data)
+  async insert (collection, data) {
+    const client = new MongoClient(process.env.DB_URL)
+
+    try {
+      await client.connect()
+      const result = await client.db(process.env.DB_NAME).collection(collection).insertOne(data)
+    } finally {
+      await client.close()
+    }
   },
 
   /**
@@ -21,8 +26,15 @@ module.exports = {
    * @param {object} options
    * @returns {Promise<*>}
    */
-  update (collection, query, data, options = {}) {
-    return client.db(process.env.DB_NAME).collection(collection).updateOne(query, data, options)
+  async update (collection, query, data, options = {}) {
+    const client = new MongoClient(process.env.DB_URL)
+
+    try {
+      await client.connect()
+      const result = await client.db(process.env.DB_NAME).collection(collection).updateOne(query, data, options)
+    } finally {
+      await client.close()
+    }
   },
 
   /**
@@ -32,8 +44,15 @@ module.exports = {
    * @param {object} options
    * @returns {Promise<*>}
    */
-  remove (collection, query, options = {}) {
-    return client.db(process.env.DB_NAME).collection(collection).deleteOne(query, options)
+  async remove (collection, query, options = {}) {
+    const client = new MongoClient(process.env.DB_URL)
+
+    try {
+      await client.connect()
+      const result = await client.db(process.env.DB_NAME).collection(collection).deleteOne(query, options)
+    } finally {
+      await client.close()
+    }
   },
 
   /**
@@ -42,8 +61,15 @@ module.exports = {
    * @param {object} query
    * @returns {Promise<*>}
    */
-  findOne (collection, query) {
-    return client.db(process.env.DB_NAME).collection(collection).findOne(query)
+  async findOne (collection, query) {
+    const client = new MongoClient(process.env.DB_URL)
+
+    try {
+      await client.connect()
+      return await client.db(process.env.DB_NAME).collection(collection).findOne(query)
+    } finally {
+      await client.close()
+    }
   },
 
   /**
@@ -55,8 +81,15 @@ module.exports = {
    * @param {object} sort
    * @returns {Promise<*>}
    */
-  find (collection, query = {}, limit = -1, skip = 0, sort = { createdAt: -1 }) {
-    return client.db(process.env.DB_NAME).collection(collection).find(query).sort(sort).skip(skip).limit(limit).toArray()
+  async find (collection, query = {}, limit = -1, skip = 0, sort = { createdAt: -1 }) {
+    const client = new MongoClient(process.env.DB_URL)
+
+    try {
+      await client.connect()
+      return await client.db(process.env.DB_NAME).collection(collection).find(query).sort(sort).skip(skip).limit(limit).toArray()
+    } finally {
+      await client.close()
+    }
   },
 
   /**
@@ -65,7 +98,13 @@ module.exports = {
    * @param {object} query
    * @returns {Promise<*>}
    */
-  count (collection, query = {}) {
-    return client.db(process.env.DB_NAME).collection(collection).countDocuments(query)
+  async count (collection, query = {}) {
+    const client = new MongoClient(process.env.DB_URL)
+    try {
+      await client.connect()
+      return await client.db(process.env.DB_NAME).collection(collection).countDocuments(query)
+    } finally {
+      await client.close()
+    }
   }
 }

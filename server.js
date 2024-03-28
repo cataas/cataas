@@ -21,29 +21,6 @@ app.api = createApi(apiConfigGenerator.config, { prefix: '', plugins: [apiDocPlu
 
 moduleLoader.load(app)
 
-app.get('/sync', async (req, res) => {
-  const { insert, findOne } = require('./src/shared/store/datastore')
-  const Datastore = require('nedb');
-  const db = new Datastore({ filename: './data/cats_development.db', autoload: true });
-
-  db.find({}, async function (err, docs) {
-    await docs.forEach(async ({ tags, createdAt, updatedAt, validated, file, mimetype, size }) => {
-      try {
-        const already = await findOne('cats', { file })
-        if (already) {
-          return
-        }
-        await insert('cats', { tags: tags.map(t => t.replace(/\s/g, '_').trim().toLowerCase()), createdAt, updatedAt, validated, file, mimetype, size })
-      } catch (e) {
-        console.error(e)
-      }
-    })
-  });
-
-  res.send('Synced');
-})
-
-
 app.group('')
   .use((req, res, next) => {
     res.set('Access-Control-Allow-Origin', process.env.CORS || '*' )
