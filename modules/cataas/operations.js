@@ -20,17 +20,13 @@ module.exports = {
     if (id && id.match(/\w{16}/)) {
       cat = await store.findOne('cats', { _id: id, ...params })
     } else if (id) {
-      tag = decodeURIComponent(id)
+      const searchTags = decodeURIComponent(id).split(',')
+      const cats = await store.find('cats', params)
+      const filteredCats = cats.filter(({ tags }) => {
+        return searchTags.every(tag => tags.includes(tag))
+      })
 
-      const query = tag.split(',').reduce((query, tags) => {
-        query.push({ tags })
-
-        return query
-      }, [])
-
-      const count = await store.count('cats', { $and: query, ...params })
-      cat = await store.find('cats', { $and: query, ...params }, 1, random(0, count - 1))
-      cat = cat[0]
+      cat = filteredCats[random(0, filteredCats.length - 1)]
     } else {
       const count = await store.count('cats', params)
       cat = await store.find('cats', params, 1, random(0, count - 1))
