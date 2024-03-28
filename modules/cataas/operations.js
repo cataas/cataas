@@ -5,9 +5,7 @@ const sharp = require('sharp')
 const { randomUUID } = require('node:crypto')
 
 function random(min, max) {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
+  return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
 }
 
 module.exports = {
@@ -20,16 +18,20 @@ module.exports = {
     if (id && id.match(/\w{16}/)) {
       cat = await store.findOne('cats', { _id: id, ...params })
     } else if (id) {
-      const searchTags = decodeURIComponent(id).split(',')
-      const cats = await store.find('cats', params)
-      const filteredCats = cats.filter(({ tags }) => {
-        return searchTags.every(tag => tags.includes(tag))
-      })
+      const query = decodeURIComponent(id).split(',').reduce((query, tags) => {
+        query.push({ tags })
 
-      cat = filteredCats[random(0, filteredCats.length - 1)]
+        return query
+      }, [])
+
+      const search = { $and: query, ...params }
+      const count = await store.count('cats', search)
+      cat = await store.find('cats', search, 1, random(0, count - 1))
+      cat = cat[0]
     } else {
-      const count = await store.count('cats', params)
-      cat = await store.find('cats', params, 1, random(0, count - 1))
+      const search = { mimetype: { $ne: 'image/gif' }, ...params }
+      const count = await store.count('cats', search)
+      cat = await store.find('cats', search, 1, random(0, count - 1))
       cat = cat[0]
     }
 
