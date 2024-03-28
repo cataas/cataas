@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/cataas/cataas/compare/v2.0.6...v2.1.0) (2024-03-28)
+
+
+### Features
+
+* Release 2.1 ([84e4e0b](https://github.com/cataas/cataas/commit/84e4e0b3ec48799cad9a010296aee4f4252eff66))
+
 ## [2.0.6](https://github.com/cataas/cataas/compare/v2.0.5...v2.0.6) (2024-03-27)
 
 
