@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/cataas/cataas/compare/v2.1.2...v2.1.3) (2024-03-28)
+
+
+### Bug Fixes
+
+* Cat search ([e64c0b5](https://github.com/cataas/cataas/commit/e64c0b5b948718c7cc4e985bd674e7e90cb15caa))
+
 ## [2.1.2](https://github.com/cataas/cataas/compare/v2.1.1...v2.1.2) (2024-03-28)
 
 
