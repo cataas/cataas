@@ -12,7 +12,6 @@ WORKDIR /home/app
 
 COPY . /home/app
 
-ENV UV_THREADPOOL_SIZE=8
 RUN npm install
 RUN npm run build
 RUN rm -rf node_modules

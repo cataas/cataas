@@ -1,7 +1,7 @@
 // const jimp = require('jimp')
 const sharp = require('sharp')
 
-sharp.concurrency(8)
+sharp.concurrency(process.env.UV_THREADPOOL_SIZE || 8)
 sharp.queue.on('change', function(queueLength) {
   const { queue, process } = sharp.counters()
   console.log(`queue: ${queue}, processing: ${process}`)
@@ -46,7 +46,7 @@ class ImageEditor {
     }
   ) {
     const isAnimated = mimetype === 'image/gif'
-    const options = { failOn: 'none' }
+    const options = { failOn: 'error' }
     const resizeOptions = {
       width,
       height,
@@ -76,7 +76,7 @@ class ImageEditor {
       resizeOptions.width = 100
     }
 
-    let sharpBuffer = sharp(buffer, options)
+    let sharpBuffer = sharp(buffer, options).timeout({ seconds: 10000 })
     sharpBuffer = sharpBuffer.resize(resizeOptions)
 
     if (blur) {
