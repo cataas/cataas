@@ -1,7 +1,7 @@
 // const jimp = require('jimp')
 const sharp = require('sharp')
 
-sharp.concurrency(6)
+sharp.concurrency(8)
 
 sharp.queue.on('change', function(queueLength) {
   console.log('Queue contains ' + queueLength + ' task(s)')
