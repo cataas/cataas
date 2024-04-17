@@ -2,10 +2,7 @@
 const sharp = require('sharp')
 
 sharp.concurrency(8)
-
 sharp.queue.on('change', function(queueLength) {
-  console.log('Queue contains ' + queueLength + ' task(s)')
-
   const { queue, process } = sharp.counters()
   console.log(`queue: ${queue}, processing: ${process}`)
 })
