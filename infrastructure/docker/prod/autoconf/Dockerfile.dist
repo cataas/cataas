@@ -1,9 +1,8 @@
-FROM alpine:edge as node-alpine-edge
+FROM alpine:3.19 as node-alpine-3-19
 
-RUN apk add --upgrade --no-cache nodejs npm
+RUN apk add --upgrade --no-cache nodejs npm libuv
 RUN apk add --upgrade --no-cache bash
 RUN apk add --upgrade --no-cache gcompat
-RUN apk add --update graphicsmagick
 
 RUN apk add --upgrade --no-cache msttcorefonts-installer
 RUN update-ms-fonts
@@ -17,6 +16,6 @@ RUN npm install
 RUN npm run build
 RUN rm -rf node_modules
 RUN npm install --production
-RUN npm install --production --force --arch=x64 --platform=linux --libc=musl sharp --include=optional sharp
+RUN npm install -g --production --force --arch=x64 --os=linux --libc=musl sharp
 
 CMD ["npm", "start"]
