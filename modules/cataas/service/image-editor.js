@@ -2,10 +2,10 @@
 const sharp = require('sharp')
 
 sharp.concurrency(process.env.UV_THREADPOOL_SIZE || 8)
-sharp.queue.on('change', function(queueLength) {
+/*sharp.queue.on('change', function(queueLength) {
   const { queue, process } = sharp.counters()
   console.log(`queue: ${queue}, processing: ${process}`)
-})
+})*/
 
 const createTextSVG = (text, { font, fontSize, fontColor, fontBackground, width, height }) => {
   const h = height * 0.2
