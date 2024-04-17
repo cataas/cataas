@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/cataas/cataas/compare/v2.1.3...v2.2.0) (2024-04-17)
+
+
+### Features
+
+* Add Worker to edit image ([9d5fb38](https://github.com/cataas/cataas/commit/9d5fb38e85b3fa44585de13d86dc429c0aae82ca))
+
 ## [2.1.3](https://github.com/cataas/cataas/compare/v2.1.2...v2.1.3) (2024-03-28)
 
 
