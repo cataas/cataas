@@ -76,7 +76,7 @@ class ImageEditor {
       resizeOptions.width = 100
     }
 
-    let sharpBuffer = sharp(buffer, options).timeout({ seconds: 10000 })
+    let sharpBuffer = sharp(buffer, options).timeout({ seconds: 3600 })
     sharpBuffer = sharpBuffer.resize(resizeOptions)
 
     if (blur) {
