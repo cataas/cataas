@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/cataas/cataas/compare/v2.2.0...v2.3.0) (2024-04-17)
+
+
+### Features
+
+* Add CPU concurrency limit ([08bd547](https://github.com/cataas/cataas/commit/08bd5475ebe370669ced5edaac68f5bba0e019f2))
+
 # [2.2.0](https://github.com/cataas/cataas/compare/v2.1.3...v2.2.0) (2024-04-17)
 
 
