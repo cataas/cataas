@@ -1,4 +1,4 @@
-FROM alpine:3.19 as node-alpine-3-19
+FROM alpine:edge as node-alpine-edge
 
 RUN apk add --upgrade --no-cache nodejs npm
 RUN apk add --upgrade --no-cache bash
@@ -17,6 +17,6 @@ RUN npm install
 RUN npm run build
 RUN rm -rf node_modules
 RUN npm install --production
-RUN npm install --production --force --arch=x64 --platform=linux --libc=musl sharp
+RUN npm install --production --force --arch=x64 --platform=linux --libc=musl sharp --include=optional sharp
 
 CMD ["npm", "start"]
