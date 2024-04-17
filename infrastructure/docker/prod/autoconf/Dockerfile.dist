@@ -1,4 +1,4 @@
-FROM alpine:3.19 as node-alpine-3-19
+FROM alpine:3.18 as node-alpine-3-19
 
 RUN apk add --upgrade --no-cache nodejs npm libuv
 RUN apk add --upgrade --no-cache bash
@@ -16,6 +16,6 @@ RUN npm install
 RUN npm run build
 RUN rm -rf node_modules
 RUN npm install --production
-RUN npm install -g --production --force --arch=x64 --os=linux --libc=musl sharp
+RUN npm install -g --production --force --arch=x64 --os=linux --libc=musl sharp@0.32.6
 
 CMD ["npm", "start"]
