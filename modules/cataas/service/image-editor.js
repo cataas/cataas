@@ -1,6 +1,15 @@
 // const jimp = require('jimp')
 const sharp = require('sharp')
 
+sharp.concurrency(6)
+
+sharp.queue.on('change', function(queueLength) {
+  console.log('Queue contains ' + queueLength + ' task(s)')
+
+  const { queue, process } = sharp.counters()
+  console.log(`queue: ${queue}, processing: ${process}`)
+})
+
 const createTextSVG = (text, { font, fontSize, fontColor, fontBackground, width, height }) => {
   const h = height * 0.2
   const y = height * 0.8

@@ -1,24 +1,11 @@
 const fs = require('fs')
 const store = require('../../src/shared/store/datastore')
+const imageEditor = require('./service/image-editor')
 const sharp = require('sharp')
 const { randomUUID } = require('node:crypto')
 
-const { Worker } = require('node:worker_threads')
-const path = require('node:path')
-
 function random(min, max) {
   return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
-}
-
-function editImage (buffer, mimetype, req, text, size, width, height) {
-  return new Promise((resolve, reject) => {
-    const worker = new Worker(path.resolve(process.cwd(), 'modules/cataas/service/worker.js'), {
-      workerData: { buffer, mimetype, args: req.query, text, size, width, height }
-    })
-
-    worker.on('message', resolve)
-    worker.on('error', reject)
-  })
 }
 
 module.exports = {
@@ -106,7 +93,11 @@ module.exports = {
       size = size <= 100 ? size : 100
     }
 
-    return await editImage(buffer, mimetype, req, text, size, width, height)
+    return imageEditor.edit(
+      buffer,
+      mimetype,
+      { text, ...req.query, size, width, height }
+    )
   },
 
   getUrl (tag = null, text = null, queries = {}, id = null) {
