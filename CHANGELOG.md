@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/cataas/cataas/compare/v2.3.0...v2.3.1) (2024-04-25)
+
+
+### Bug Fixes
+
+* API tags and server URL ([49aa6b7](https://github.com/cataas/cataas/commit/49aa6b768cd11118dc3bb2ae2b297aafc06a5bfa))
+
 # [2.3.0](https://github.com/cataas/cataas/compare/v2.2.0...v2.3.0) (2024-04-17)
 
 
