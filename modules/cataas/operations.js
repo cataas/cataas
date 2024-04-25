@@ -53,7 +53,7 @@ module.exports = {
   },
 
   async tags () {
-    const cats = await store.find('cats', { validated: true })
+    const cats = await store.find('cats', { validated: true }, 9999)
     const result = []
 
     cats.forEach(({ tags }) => {

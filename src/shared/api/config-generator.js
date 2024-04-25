@@ -17,8 +17,7 @@ module.exports = {
         description: apiConfig.description
       },
       servers: [
-        { url: `http://localhost:${process.env.NODE_PORT}` },
-        { url: `${process.env.HOST}` }
+        { url: process.env.APP_ENV === 'production' ? `${process.env.HOST}` : `http://localhost:${process.env.NODE_PORT}` }
       ],
       tags: apiConfig.tags || [],
       components: this.components,
