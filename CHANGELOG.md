@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/cataas/cataas/compare/v2.3.1...v2.3.2) (2024-05-06)
+
+
+### Bug Fixes
+
+* URL generated for HTML display ([559cd13](https://github.com/cataas/cataas/commit/559cd1355f442b545ebe30353339d8c616fb9888))
+
 ## [2.3.1](https://github.com/cataas/cataas/compare/v2.3.0...v2.3.1) (2024-04-25)
 
 
