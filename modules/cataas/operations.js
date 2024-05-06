@@ -112,32 +112,10 @@ module.exports = {
 
     url += text ? `/says/${text}` : ''
 
-    if (queries.color) {
-      q.push(`color=${queries.color}`)
-    }
-
-    if (queries.size) {
-      q.push(`size=${queries.size}`)
-    }
-
-    if (queries.type) {
-      q.push(`type=${queries.type}`)
-    }
-
-    if (queries.filter) {
-      q.push(`filter=${queries.filter}`)
-    }
-
-    if (queries.width) {
-      q.push(`width=${queries.width}`)
-    }
-
-    if (queries.height) {
-      q.push(`height=${queries.height}`)
-    }
-
-    if (queries.gravity) {
-      q.push(`gravity=${queries.gravity}`)
+    for (const key in queries) {
+      if (queries[key] && key !== 'html') {
+        q.push(`${key}=${encodeURIComponent(queries[key])}`)
+      }
     }
 
     if (q.length > 0) {
