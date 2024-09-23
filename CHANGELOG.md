@@ -1,3 +1,10 @@
+## [2.3.3](https://github.com/cataas/cataas/compare/v2.3.2...v2.3.3) (2024-09-23)
+
+
+### Bug Fixes
+
+* Disable analytics ([4a3dd72](https://github.com/cataas/cataas/commit/4a3dd72e0d453d7f16f12ea46351d3d899fee76c))
+
 ## [2.3.2](https://github.com/cataas/cataas/compare/v2.3.1...v2.3.2) (2024-05-06)
 
 
