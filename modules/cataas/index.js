@@ -1,5 +1,5 @@
 const { findCat, cats, tags, count, getUrl, editImage, createCat } = require('./operations')
-//const { sendAnalytic } = require('./analytics')
+const { sendAnalytic } = require('./analytics')
 const fs = require('fs')
 
 module.exports = app => {
@@ -9,7 +9,7 @@ module.exports = app => {
     const { html, json } = req.query
     const cat = await findCat({ ...req.params, ...req.query })
 
-    //sendAnalytic(req)
+    sendAnalytic(req)
 
     if (!cat) {
       return res.send('Cat not found', 404)
