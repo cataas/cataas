@@ -19,6 +19,7 @@
     "@boutdecode/encoding": "^1.0.0",
     "@boutdecode/i18n": "^1.3.0",
     "@boutdecode/session": "^1.1.0",
+    "@sentry/node": "^8.52.0",
     "@tamia-web/doc-plugin": "^0.1.2",
     "@tamia-web/tamia": "^2.0.0",
     "dotenv": "^16.3.1",

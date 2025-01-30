@@ -1,4 +1,4 @@
-FROM alpine:3.18 as node-alpine-3-19
+FROM alpine:3.18 AS node-alpine-3-19
 
 RUN apk add --upgrade --no-cache nodejs npm libuv
 RUN apk add --upgrade --no-cache bash

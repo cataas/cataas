@@ -1,6 +1,7 @@
 const { createApi } = require('@tamia-web/tamia')
 const apiDocPlugin = require('@tamia-web/doc-plugin')
 const { createApp, createServer } = require('yion')
+const Sentry = require('@sentry/node')
 const bodyParser = require('yion-body-parser')
 const sessionPlugin = require('@boutdecode/session/yion/session-plugin')
 const i18nPlugin = require('@boutdecode/i18n/yion/i18n-plugin')
@@ -13,11 +14,22 @@ const moduleLoader = require('./src/shared/configuration/module-loader')
 
 require('./config/config')
 
+Sentry.init({ dsn: process.env.SENTRY_DSN })
+
 moduleLoader.configure()
 
 const app = createApp()
 const server = createServer(app, [renderPlugin, routerPlugin, sessionPlugin, i18nPlugin, encodingPlugin, bodyParser])
 app.api = createApi(apiConfigGenerator.config, { prefix: '', plugins: [apiDocPlugin('')] })
+
+app.use((req, res, next) => {
+  try {
+    next()
+  } catch (e) {
+    Sentry.captureException(e)
+    next()
+  }
+})
 
 moduleLoader.load(app)
 
