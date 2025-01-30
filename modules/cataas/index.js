@@ -11,18 +11,6 @@ module.exports = app => {
     const cat = await findCat({ ...req.params, ...req.query })
 
     //sendAnalytic(req)
-    Sentry.captureEvent({
-      message: 'Cat requested',
-      level: 'info',
-      extra: {
-        request: {
-          url: req.url,
-          method: req.method,
-          query: req.query
-        },
-        cat
-      }
-    })
 
     if (!cat) {
       return res.send('Cat not found', 404)
