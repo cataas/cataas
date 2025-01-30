@@ -26,4 +26,8 @@ module.exports = app => {
   app.get('/404', (req, res) => {
     res.render('error/404')
   }, 'error:not_found')
+
+  app.get('/error', (req, res) => {
+    throw new Error('Oops error')
+  }, 'upload')
 }
