@@ -1,7 +1,8 @@
+const Sentry = require('@sentry/node')
+
 const { createApi } = require('@tamia-web/tamia')
 const apiDocPlugin = require('@tamia-web/doc-plugin')
 const { createApp, createServer } = require('yion')
-const Sentry = require('@sentry/node')
 const bodyParser = require('yion-body-parser')
 const sessionPlugin = require('@boutdecode/session/yion/session-plugin')
 const i18nPlugin = require('@boutdecode/i18n/yion/i18n-plugin')

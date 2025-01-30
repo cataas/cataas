@@ -1,6 +1,7 @@
 const { findCat, cats, tags, count, getUrl, editImage, createCat } = require('./operations')
 //const { sendAnalytic } = require('./analytics')
 const fs = require('fs')
+const Sentry = require('@sentry/node')
 
 module.exports = app => {
   const { api } = app
@@ -62,6 +63,7 @@ module.exports = app => {
       res.write(buffer)
       res.end()
     } catch (error) {
+      Sentry.captureException(error)
       const { message, code } = error
 
       console.error(error)
@@ -108,6 +110,7 @@ module.exports = app => {
     try {
       await createCat(req.body)
     } catch (e) {
+      Sentry.captureException(e)
       console.error(e)
 
       return res.render('upload', { error: e.message })
