@@ -18,6 +18,7 @@ require('./config/config')
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   tracesSampleRate: process.env.SENTRY_SAMPLE_RATE || 1.0,
+  profilesSampleRate: process.env.SENTRY_SAMPLE_RATE || 1.0,
 })
 
 moduleLoader.configure()
