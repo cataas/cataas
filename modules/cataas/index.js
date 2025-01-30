@@ -14,8 +14,12 @@ module.exports = app => {
     Sentry.captureEvent({
       message: 'Cat requested',
       level: 'info',
-      request: req,
       extra: {
+        request: {
+          url: req.url,
+          method: req.method,
+          query: req.query
+        },
         cat
       }
     })
