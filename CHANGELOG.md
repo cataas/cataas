@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/cataas/cataas/compare/v2.4.0...v2.4.1) (2025-01-30)
+
+
+### Bug Fixes
+
+* Disable error route ([922f363](https://github.com/cataas/cataas/commit/922f3638cd2c5d3bcfff22bbf3581c0486de6616))
+
 # [2.4.0](https://github.com/cataas/cataas/compare/v2.3.4...v2.4.0) (2025-01-30)
 
 
