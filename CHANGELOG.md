@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/cataas/cataas/compare/v2.3.4...v2.4.0) (2025-01-30)
+
+
+### Features
+
+* Add Sentry ([7369ba9](https://github.com/cataas/cataas/commit/7369ba924c0563389a3b959af0cdd97e24436236))
+
 ## [2.3.4](https://github.com/cataas/cataas/compare/v2.3.3...v2.3.4) (2024-10-22)
 
 
