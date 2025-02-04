@@ -1,56 +1,56 @@
-const Sentry = require('@sentry/node')
+import sentry from './plugins/sentry.js'
+import store from './plugins/store.js'
+import { bootstrap } from '@boutdecode/yion'
 
-const { createApi } = require('@tamia-web/tamia')
-const apiDocPlugin = require('@tamia-web/doc-plugin')
-const { createApp, createServer } = require('yion')
-const bodyParser = require('yion-body-parser')
-const sessionPlugin = require('@boutdecode/session/yion/session-plugin')
-const i18nPlugin = require('@boutdecode/i18n/yion/i18n-plugin')
-const encodingPlugin = require('@boutdecode/encoding/yion/encoding-plugin')
-
-const routerPlugin = require('./src/shared/yion/plugin/router')
-const renderPlugin = require('./src/shared/yion/plugin/render')
-const apiConfigGenerator = require('./src/shared/api/config-generator')
-const moduleLoader = require('./src/shared/configuration/module-loader')
-
-require('./config/config')
-
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  tracesSampleRate: process.env.SENTRY_SAMPLE_RATE || 1.0,
-  profilesSampleRate: process.env.SENTRY_SAMPLE_RATE || 1.0,
-})
-
-moduleLoader.configure()
-
-const app = createApp()
-const server = createServer(app, [renderPlugin, routerPlugin, sessionPlugin, i18nPlugin, encodingPlugin, bodyParser])
-app.api = createApi(apiConfigGenerator.config, { prefix: '', plugins: [apiDocPlugin('')] })
-
-app.use((req, res, next) => {
-  try {
-    next()
-  } catch (e) {
-    Sentry.captureException(e)
-    next()
+bootstrap({
+  plugins: [sentry, store],
+  config: {
+    application: {
+      hostname: process.env.HOST || 'http://localhost',
+      metaTitle: 'Cat as a service (CATAAS)',
+      metaDescription: 'Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.',
+      metaAuthor: 'Kevin Balicot <kevinbalicot@gmail.com>',
+      analytics: {
+        url: 'https://analytics.boutdecode.fr',
+        websiteId: process.env.ANALYTICS_ID
+      },
+    },
+    cache: {
+      'Cache-Control': 'public, max-age=' + (86400 * 30),
+      'Content-Encoding': 'gzip',
+      ETag: Date.now(),
+      Vary: 'Accept-Encoding'
+    },
+    assets: true,
+    cors: {
+      origin: process.env.CORS || '*',
+      headers: 'X-Requested-With, Content-Type, Accept, Origin, Authorization',
+      methods: 'GET, POST, PUT, DELETE, OPTIONS'
+    },
+    api: {
+      apiPrefix: '',
+      info: {
+        version: '1.0.0',
+        title: 'Cat as a service (CATAAS)',
+        description: 'Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.',
+      },
+      tags: [
+        { name: 'Cats', description: 'Cataas API' },
+        { name: 'API', description: 'Public API' },
+      ]
+    },
+    view: {
+      render: 'pug',
+      folder: 'templates',
+      globals: {}
+    },
+    translation: {
+      fallback: process.env.LOCALE,
+      locales: ['fr', 'en']
+    },
+    modules: {
+      modules: ['website', 'cataas'],
+      folder: 'modules'
+    }
   }
 })
-
-moduleLoader.load(app)
-
-app.group('')
-  .use((req, res, next) => {
-    res.set('Access-Control-Allow-Origin', process.env.CORS || '*' )
-    res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-
-    if (req.method === 'OPTIONS') {
-      return res.send()
-    }
-
-    next()
-  })
-  .use(app.api.middleware)
-
-server.listen(process.env.NODE_PORT)
-    .on('listening', () => console.log(`🤖 Server starting on port ${process.env.NODE_PORT}.`))

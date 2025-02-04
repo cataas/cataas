@@ -19,7 +19,7 @@ export default ({ mode }) => {
       rollupOptions: {
         input: {
           front: './assets/front/main.js',
-          admin: './assets/admin/main.js',
+          //admin: './assets/admin/main.js',
         },
         output: env !== 'production' ? {
           entryFileNames: `build/[name].js`,
@@ -33,7 +33,7 @@ export default ({ mode }) => {
     },
     resolve: {
       alias: {
-        '@admin': fileURLToPath(new URL('./assets/admin', import.meta.url)),
+        //'@admin': fileURLToPath(new URL('./assets/admin', import.meta.url)),
         '@front': fileURLToPath(new URL('./assets/front', import.meta.url))
       }
     }

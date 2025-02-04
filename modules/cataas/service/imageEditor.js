@@ -1,5 +1,5 @@
 // const jimp = require('jimp')
-const sharp = require('sharp')
+import sharp from 'sharp'
 
 sharp.concurrency(process.env.UV_THREADPOOL_SIZE || 8)
 /*sharp.queue.on('change', function(queueLength) {
@@ -164,4 +164,4 @@ class ImageEditor {
   } */
 }
 
-module.exports = new ImageEditor()
+export default new ImageEditor()

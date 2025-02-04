@@ -5,22 +5,22 @@ html(lang=locale)
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
         block description
-            meta(name="description", content=settings('metaDescription'))
+            meta(name="description", content=setting('metaDescription'))
 
-        meta(name="author", content=settings('metaAuthor'))
+        meta(name="author", content=setting('metaAuthor'))
 
         block metadata
-            meta(property="og:title", content=settings('metaTitle'))
-            meta(property="og:description", content=settings('metaDescription'))
+            meta(property="og:title", content=setting('metaTitle'))
+            meta(property="og:description", content=setting('metaDescription'))
             meta(property="og:url", content=url)
 
         meta(property="og:type", content="website")
         meta(property="og:image", content="https://cataas.com/cat/says/cataas.com?t=sq")
 
-        script(src=analytics.url, data-website-id=analytics.websiteId, async)
+        script(src=setting('analytics.url'), data-website-id=setting('analytics.websiteId'), async)
 
         block title
-            title=settings('metaTitle')
+            title=setting('metaTitle')
 
         link(rel="icon", type="image/png", href="/cat?width=32&height=32")
         link(rel="canonical" href=canonical)

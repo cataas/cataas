@@ -9,7 +9,7 @@ RUN apk add --update graphicsmagick
 RUN apk add --upgrade --no-cache msttcorefonts-installer
 RUN update-ms-fonts
 
-RUN mkdir -p /home/app
+RUN mkdir -p /home/app /home/app/data/images /home/app/data/cache/images
 WORKDIR /home/app
 
 COPY . /home/app
