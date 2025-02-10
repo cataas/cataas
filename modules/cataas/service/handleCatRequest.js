@@ -9,7 +9,7 @@ export default async ({ req, res, store }) => {
   const { html, json } = req.query
   const cat = await findCat(store)(req.params)
 
-  sendAnalytic(req)
+  //sendAnalytic(req)
 
   if (!cat) {
     return res.send('Cat not found', 404)
