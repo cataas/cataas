@@ -9,9 +9,9 @@ function random(min, max) {
   return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
 }
 
-export const findCat = (store) => async (id) => {
+export const findCat = (store) => async ({ id, tag }) => {
   const params = { validated: true }
-  id = id ? id.split('.')[0] : undefined
+  id = id ? id.split('.')[0] : tag
 
   let cat = null
   // If the id is a valid UUID, we can use it to find a specific cat

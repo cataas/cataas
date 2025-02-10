@@ -7,7 +7,7 @@ import { findCat, editImage, getUrl, getId } from './operations.js'
 
 export default async ({ req, res, store }) => {
   const { html, json } = req.query
-  const cat = await findCat(store)(req.params.id)
+  const cat = await findCat(store)(req.params)
 
   sendAnalytic(req)
 
