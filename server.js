@@ -11,7 +11,7 @@ bootstrap({
       metaDescription: 'Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.',
       metaAuthor: 'Kevin Balicot <kevinbalicot@gmail.com>',
       analytics: {
-        url: 'https://analytics.boutdecode.fr',
+        url: 'https://analytics.boutdecode.fr/getinfo',
         websiteId: process.env.ANALYTICS_ID
       },
     },
