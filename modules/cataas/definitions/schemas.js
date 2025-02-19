@@ -15,8 +15,8 @@ export const parameters = z.object({
   saturation: z.coerce.number().optional().openapi({ description: 'With custom filter, define saturation' }),
   hue: z.coerce.number().optional().openapi({ description: 'With custom filter, define hue' }),
   lightness: z.coerce.number().optional().openapi({ description: 'With custom filter, define lightness' }),
-  html: z.boolean().optional(),
-  json: z.boolean().optional(),
+  html: z.coerce.boolean().optional(),
+  json: z.coerce.boolean().optional(),
 })
 
 export const textParameters = z.object({

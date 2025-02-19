@@ -1,5 +1,4 @@
 import * as Sentry from '@sentry/node'
-import { z } from '@boutdecode/open-api'
 import { createCat } from '../service/operations.js'
 
 export const context = 'app'
