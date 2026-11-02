@@ -25,6 +25,10 @@ html(lang=locale)
         link(rel="icon", type="image/png", href="/cat?width=32&height=32")
         link(rel="canonical" href=canonical)
 
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
+        link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap")
+
         block style
             link(rel="stylesheet", href=asset('front/main.css'))
 
@@ -34,6 +38,7 @@ html(lang=locale)
     body
         include includes/topbar
 
-        block content
+        main
+            block content
 
         include includes/footer

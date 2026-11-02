@@ -1,3 +1,10 @@
-footer.footer.bg-white.border-top.mt-4
-    div.container.py-lg-4.py-3.px-3.text-end
-        | @ #{new Date().getFullYear()} - Made with ❤️ by #[a(href="https://boutdecode.fr", target="_blank") Kevin] - all rights reserved
+footer.site-footer.container
+    span
+        | © #{new Date().getFullYear()} CATAAS — #{t('footer.made')} 
+        a(href="https://boutdecode.fr", target="_blank", rel="noopener") Kevin
+        |  — #{t('footer.rights')}
+    span.site-footer__links
+        a(href="https://dev-null.sh/@cataas", target="_blank", rel="noopener")= t('footer.follow')
+        a(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank", rel="noopener", data-umami-event="Donate button")= t('footer.donate')
+        a(href="/upload")= t('footer.upload')
+        a(href="#top")= t('footer.top')

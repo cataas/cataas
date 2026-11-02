@@ -24,12 +24,11 @@
     "jsdom": "^22.1.0",
     "jsonwebtoken": "^9.0.1",
     "pug": "^3.0.3",
-    "sharp": "0.32.6"
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
     "@popperjs/core": "^2.11.8",
     "@vitejs/plugin-vue": "^4.3.4",
-    "bootstrap": "^5.3.2",
     "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.28.1",

@@ -1,27 +1,26 @@
 extends layout
 
 block content
-    section.container.mt-4
-        header.mb-4
-            h1 Upload cats 🐱
+    section.container.section
+        header.heading
+            span.eyebrow= t('upload.eyebrow')
+            h2= t('upload.title')
 
         div.card
-            div.card-body.shadow
-                if error
-                    p.alert.alert-danger= error
+            if error
+                p.alert.alert--error= error
 
-                if ok
-                    p.alert.alert-success Your cat has been uploaded successfully!
+            if ok
+                p.alert.alert--success= t('upload.ok')
 
-                form(method="post", enctype="multipart/form-data")
-                    div.mt-3
-                        label(for="file").form-label Select a cat
-                        input(type="file", name="file", id="file", accept="image/*", required).form-control
+            form(method="post", enctype="multipart/form-data")
+                div.field
+                    label(for="file")= t('upload.file')
+                    input(type="file", name="file", id="file", accept="image/*", required)
 
-                    div.mt-3
-                        label(for="tags").form-label Tags
-                        input(type="text", name="tags", id="tags", placeholder="cute, orange, ...", required).form-control
-                        div.form-text We recommend to use comma to separate tags
+                div.field
+                    label(for="tags")= t('upload.tags')
+                    input(type="text", name="tags", id="tags", placeholder=t('upload.tags_placeholder'), required)
+                    span.hint= t('upload.tags_help')
 
-                    div.mt-4
-                        button(type="submit").btn.btn-primary Upload
+                button.btn.btn--primary(type="submit")= t('upload.submit')

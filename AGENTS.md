@@ -1,7 +1,7 @@
 # AGENTS.md
 
 ## Présentation
-CATAAS (« Cat as a service ») : API REST publique qui sert des images de chats (aléatoire, par tag ou par id), avec redimensionnement, filtres et texte via query string. Projet ESM (`"type": "module"`), framework `@boutdecode/yion`, Prisma/PostgreSQL, sharp, pug, Sentry.
+CATAAS (« Cat as a service ») : API REST publique qui sert des images de chats (aléatoire, par tag ou par id), avec redimensionnement, filtres et texte via query string. Projet ESM (`"type": "module"`), framework `@boutdecode/yion`, Prisma/PostgreSQL, sharp, pug, Sentry. Front : pug + SCSS maison (tokens en variables CSS, sans Bootstrap), JS vanilla.
 
 Point d'entrée : `server.js` → `bootstrap()` avec les plugins `sentry` et `store` (PrismaClient injecté dans les handlers) et les modules `website`, `cataas` et `admin`.
 
@@ -23,8 +23,8 @@ Variables d'environnement : voir `.env.dist` (`DATABASE_URL`, `HOST`, `NODE_PORT
 - `modules/cataas/service/` : `handleCatRequest.js`, `operations.js` (`findCat`, `editImage`, `createCat`…), `imageEditor.js` (sharp), `analytics.js`
 - `modules/cataas/definitions/schemas.js` : schémas Zod
 - `modules/website/` : pages, middleware de cache (ETag/304), assets
-- `plugins/`, `prisma/` (schéma + migrations), `templates/` (pug), `translations/` (fr, en)
-- `assets/front/` : seul bundle front actif
+- `plugins/`, `prisma/` (schéma + migrations), `templates/` (pug, textes via `t('clé')`), `translations/` (fr, en : mêmes clés dans les deux fichiers)
+- `assets/front/` : seul bundle front actif (`main.js`, `demo.js` = démo interactive branchée sur `/cat*`, `assets/sass/` = tokens/base/layout/components/home/admin)
 - `infrastructure/` : gabarits Docker/autoconf copiés à la racine par `./configure`
 - `data/` (gitignoré) : `images/` originaux, `cache/images/` rendus
 

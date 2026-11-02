@@ -1,19 +1,93 @@
 {
-  "home": "Home",
+  "home": {
+    "title": "CATAAS — Cat as a Service",
+    "hero": {
+      "badge": "Free · No API key · Open source",
+      "title_a": "Cats,",
+      "title_b": "from a simple",
+      "title_c": "URL",
+      "lead": "CATAAS — Cat as a Service — serves random cat images and GIFs, with text, filters and tags. One link, one cat. That's it.",
+      "try": "Try it now",
+      "endpoints": "See the endpoints"
+    },
+    "demo": {
+      "alt": "A random cat",
+      "text": "Text on the image",
+      "filter": "Filter",
+      "format": "Format",
+      "another": "Another cat",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "error": "Could not load a cat, try again.",
+      "filters": {
+        "none": "None",
+        "mono": "Mono",
+        "negate": "Negative",
+        "blur": "Blur"
+      },
+      "formats": {
+        "default": "Default",
+        "square": "Square",
+        "medium": "Medium",
+        "small": "Small",
+        "xsmall": "X-small",
+        "gif": "GIF"
+      }
+    },
+    "stats": {
+      "cats": "Cats served",
+      "free": "No subscription",
+      "keys": "No sign-up required",
+      "formats": "Available formats",
+      "dogs": "Zero dogs, promise"
+    },
+    "api": {
+      "title": "A few endpoints, plenty of possibilities.",
+      "try": "Try it",
+      "random": "A random cat, as an image.",
+      "tag": "A random cat matching a tag. Combine several with commas.",
+      "gif": "A random animated cat, as a GIF.",
+      "says": "A random cat saying the text.",
+      "tagsays": "A random cat with a tag, saying the text.",
+      "style": "Customize the text with fontSize and fontColor.",
+      "type": "Image size: xsmall, small, medium or square.",
+      "filter": "Apply a filter: blur, mono, negate or custom.",
+      "custom": "Custom filter with brightness, lightness, saturation, hue, or r, g, b.",
+      "size": "Resize with width and/or height.",
+      "html": "Return an HTML page, handy for embedded previews.",
+      "json": "Return the cat as a JSON object.",
+      "cats": "List cats as JSON (tags, skip, limit).",
+      "tags": "List all available tags as JSON.",
+      "more_title": "More possibilities",
+      "more_desc": "Fonts, positions, fit, custom filters and more: every parameter is in the full documentation.",
+      "more_link": "Read the documentation"
+    },
+    "usage": {
+      "title": "Paste it anywhere.",
+      "lead": "An image tag is all you need. Combine text, size and filter right in the URL.",
+      "resize": "Resize + filter",
+      "json": "JSON response",
+      "uses": "CATAAS can be used for testing, placeholders, monitoring, education… whatever you need."
+    },
+    "cta": {
+      "title": "Ready to add cats to your project?",
+      "button": "Read the documentation",
+      "donate": "Buy me a beer 🍺"
+    }
+  },
   "hello_world": "Hello World",
   "admin": "Administration",
   "dashboard": "Dashboard",
   "yes": "Yes",
   "no": "No",
   "delete_resource": "Delete resource",
-  "brand_name": "Cataas",
+  "brand_name": "CATAAS",
   "image": "Image",
   "validated": "Validated",
   "tags": "Tags",
   "edited_at": "Edited at",
   "created_at": "Created at",
   "cats": "Cats",
-
   "actions": {
     "sign_in": "Sign in",
     "logout": "Logout",
@@ -33,20 +107,68 @@
     "previous": "Previous",
     "next": "Next"
   },
-
   "form": {
     "label": {
       "username": "Username",
       "password": "Password",
       "remember_me": "Remember me"
     },
-
-    "help": {
-    },
-
+    "help": {},
     "placeholder": {
       "username": "Type your username",
       "password": "Type your password"
     }
+  },
+  "nav": {
+    "demo": "Demo",
+    "api": "API",
+    "usage": "Usage",
+    "docs": "Documentation",
+    "upload": "Upload a cat",
+    "home": "Home",
+    "support": "Support the project"
+  },
+  "footer": {
+    "made": "Made with ❤️ by",
+    "rights": "all rights reserved",
+    "top": "Back to top",
+    "upload": "Upload",
+    "follow": "Follow us",
+    "donate": "Support the project"
+  },
+  "upload": {
+    "title": "Upload a cat",
+    "eyebrow": "/ Upload",
+    "ok": "Your cat has been uploaded successfully! It will appear once validated.",
+    "file": "Select a cat",
+    "tags": "Tags",
+    "tags_help": "Separate tags with commas",
+    "tags_placeholder": "cute, orange, ...",
+    "submit": "Upload"
+  },
+  "admin_page": {
+    "title": "Administration",
+    "pending": "Pending",
+    "validated": "Validated",
+    "all": "All",
+    "count": "{{count}} image(s)",
+    "empty": "No image.",
+    "tags": "Tags",
+    "save": "Save",
+    "validate": "Validate",
+    "delete": "Delete",
+    "refuse": "Refuse",
+    "confirm_delete": "Permanently delete this image?",
+    "badge_validated": "Validated",
+    "badge_pending": "Pending",
+    "pagination": "Pagination",
+    "previous": "‹ Previous",
+    "next": "Next ›",
+    "kb": "KB"
+  },
+  "error_404": {
+    "title": "Page not found",
+    "text": "This cat wandered off.",
+    "back": "Back to home"
   }
 }
