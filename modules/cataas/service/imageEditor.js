@@ -121,8 +121,10 @@ class ImageEditor {
     if (text) {
       // metadata() sur un pipeline renvoie les dimensions de l'entrée, pas celles du rendu :
       // on matérialise d'abord l'image redimensionnée pour superposer un calque de même taille
-      const { data, info } = await sharpBuffer.toBuffer({ resolveWithObject: true })
+      const data = await sharpBuffer.toBuffer()
       sharpBuffer = sharp(data, options).timeout({ seconds: 10 })
+      // pageHeight = hauteur d'une image (pour un GIF animé, height est la somme de toutes les images)
+      const info = await sharpBuffer.metadata()
       sharpBuffer = sharpBuffer.composite([
         {
           input: createTextSVG(text, { font, fontSize, fontColor, fontBackground, fontPosition, width: info.width, height: info.pageHeight || info.height }),
