@@ -49,7 +49,7 @@ bootstrap({
       locales: ['fr', 'en']
     },
     modules: {
-      modules: ['website', 'cataas'],
+      modules: ['website', 'cataas', 'admin'],
       folder: 'modules'
     }
   }

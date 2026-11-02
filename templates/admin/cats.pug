@@ -1,0 +1,63 @@
+extends ../layout
+
+block content
+    - const here = `/admin?status=${status}&page=${page}`
+    section.container.mt-4
+        header.mb-4.d-flex.justify-content-between.align-items-center
+            h1 Administration 🐱
+            ul.nav.nav-pills
+                each label, key in { pending: 'En attente', validated: 'Validées', all: 'Toutes' }
+                    li.nav-item
+                        a.nav-link(href=`/admin?status=${key}`, class=status === key ? 'active' : '')= label
+
+        p.text-muted #{total} image(s)
+
+        if cats.length === 0
+            p.alert.alert-info Aucune image.
+
+        div.row.g-3
+            each cat in cats
+                div.col-12.col-md-6.col-lg-4
+                    div.card.h-100.shadow-sm
+                        img.card-img-top(src=`/admin/images/${cat.id}`, alt=cat.tags.join(', '), loading="lazy", style="object-fit: cover; height: 220px")
+                        div.card-body
+                            p.small.text-muted.mb-2
+                                | #{cat.mimetype} · #{Math.round(cat.size / 1024)} Ko ·
+                                |  #{cat.createdAt.toISOString().slice(0, 10)}
+                                if cat.validated
+                                    span.badge.bg-success.ms-2 Validée
+                                else
+                                    span.badge.bg-warning.text-dark.ms-2 En attente
+
+                            form(method="post", action=`/admin/cats/${cat.id}/tags`).mb-3
+                                input(type="hidden", name="return", value=here)
+                                label.form-label.small(for=`tags-${cat.id}`) Tags
+                                div.input-group
+                                    input.form-control(type="text", name="tags", id=`tags-${cat.id}`, value=cat.tags.join(', '))
+                                    button.btn.btn-outline-secondary(type="submit") Enregistrer
+
+                            div.d-flex.gap-2
+                                if !cat.validated
+                                    form(method="post", action=`/admin/cats/${cat.id}/validate`)
+                                        input(type="hidden", name="return", value=here)
+                                        button.btn.btn-success(type="submit") Valider
+                                form(method="post", action=`/admin/cats/${cat.id}/delete`, onsubmit="return confirm('Supprimer définitivement cette image ?')")
+                                    input(type="hidden", name="return", value=here)
+                                    button.btn.btn-danger(type="submit")= cat.validated ? 'Supprimer' : 'Refuser'
+
+        if pages > 1
+            //- Fenêtre autour de la page courante : 1 … 4 5 [6] 7 8 … 70
+            - const shown = [...new Set([1, pages, ...Array.from({ length: 5 }, (_, i) => page - 2 + i)])].filter(n => n >= 1 && n <= pages).sort((a, b) => a - b)
+            - const href = n => `/admin?status=${status}&page=${n}`
+            nav.mt-4(aria-label="Pagination")
+                ul.pagination.flex-wrap.justify-content-center
+                    li.page-item(class=page <= 1 ? 'disabled' : '')
+                        a.page-link(href=href(page - 1)) ‹ Précédent
+                    each n, index in shown
+                        if index > 0 && n - shown[index - 1] > 1
+                            li.page-item.disabled
+                                span.page-link …
+                        li.page-item(class=n === page ? 'active' : '')
+                            a.page-link(href=href(n))= n
+                    li.page-item(class=page >= pages ? 'disabled' : '')
+                        a.page-link(href=href(page + 1)) Suivant ›
