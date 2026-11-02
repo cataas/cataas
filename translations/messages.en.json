@@ -69,6 +69,17 @@
       "json": "JSON response",
       "uses": "CATAAS can be used for testing, placeholders, monitoring, education… whatever you need."
     },
+    "cli": {
+      "title": "Cats in your terminal.",
+      "lead": "The CATAAS CLI shows cats straight in your terminal, with the same tags, text and filters as the API.",
+      "modes": "Full-resolution images on Kitty and iTerm2, colored half-blocks everywhere else, animated GIFs included.",
+      "github": "View on GitHub",
+      "install": "Install (Linux / macOS)",
+      "random": "A random cat with tags",
+      "text": "Text and filter",
+      "gif": "An animated cat",
+      "tags": "List available tags"
+    },
     "cta": {
       "title": "Ready to add cats to your project?",
       "button": "Read the documentation",
@@ -123,6 +134,7 @@
     "demo": "Demo",
     "api": "API",
     "usage": "Usage",
+    "cli": "CLI",
     "docs": "Documentation",
     "upload": "Upload a cat",
     "home": "Home",

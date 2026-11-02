@@ -69,6 +69,17 @@
       "json": "Réponse JSON",
       "uses": "CATAAS peut servir pour des tests, des placeholders, du monitoring, de l'éducation… peu importe."
     },
+    "cli": {
+      "title": "Des chats dans votre terminal.",
+      "lead": "Le CLI CATAAS affiche des chats directement dans votre terminal, avec les mêmes tags, textes et filtres que l'API.",
+      "modes": "Images pleine résolution sur Kitty et iTerm2, demi-blocs colorés partout ailleurs, GIF animés inclus.",
+      "github": "Voir sur GitHub",
+      "install": "Installation (Linux / macOS)",
+      "random": "Un chat aléatoire avec des tags",
+      "text": "Texte et filtre",
+      "gif": "Un chat animé",
+      "tags": "Lister les tags disponibles"
+    },
     "cta": {
       "title": "Prêt à ajouter des chats à votre projet ?",
       "button": "Lire la documentation",
@@ -123,6 +134,7 @@
     "demo": "Démo",
     "api": "API",
     "usage": "Utilisation",
+    "cli": "CLI",
     "docs": "Documentation",
     "upload": "Envoyer un chat",
     "home": "Accueil",

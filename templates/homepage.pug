@@ -95,6 +95,31 @@ block content
                 | <span class="c">/* #{t('home.usage.json')} */</span>
                 | https://cataas.com/cat?json=true
 
+    section#cli.container.section
+        div.usage
+            div.usage__text
+                span.eyebrow / CLI
+                h2= t('home.cli.title')
+                p.lead= t('home.cli.lead')
+                p.lead= t('home.cli.modes')
+                div
+                    a.btn.btn--outline(href="https://github.com/cataas/cli", target="_blank", rel="noopener")= t('home.cli.github')
+            div.card.code.usage__code
+                | <span class="c">/* #{t('home.cli.install')} */</span>
+                | curl -fsSL https://raw.githubusercontent.com/cataas/cli/main/install.sh | bash
+                |
+                | <span class="c">/* #{t('home.cli.random')} */</span>
+                | <span class="a">cataas</span> cute orange
+                |
+                | <span class="c">/* #{t('home.cli.text')} */</span>
+                | <span class="a">cataas</span> --says "Hello" --filter mono
+                |
+                | <span class="c">/* #{t('home.cli.gif')} */</span>
+                | <span class="a">cataas</span> --gif
+                |
+                | <span class="c">/* #{t('home.cli.tags')} */</span>
+                | <span class="a">cataas</span> tags
+
     section.container.section
         div.cta
             h2= t('home.cta.title')
