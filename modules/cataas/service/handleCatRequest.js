@@ -2,14 +2,11 @@ import fs from 'node:fs'
 import path from 'node:path'
 import * as Sentry from '@sentry/node'
 
-import { sendAnalytic } from './analytics.js'
 import { findCat, editImage, getUrl, getId } from './operations.js'
 
 export default async ({ req, res, store }) => {
   const { html, json } = req.query
   const cat = await findCat(store)(req.params)
-
-  //sendAnalytic(req)
 
   if (!cat) {
     return res.send('Cat not found', 404)

@@ -170,5 +170,9 @@
     "title": "Page introuvable",
     "text": "Ce chat s'est enfui.",
     "back": "Retour à l'accueil"
+  },
+  "meta": {
+    "title": "$t(home.title)",
+    "description": "$t(home.hero.lead)"
   }
 }

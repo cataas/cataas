@@ -20,7 +20,7 @@ Variables d'environnement : voir `.env.dist` (`DATABASE_URL`, `HOST`, `NODE_PORT
 ## Structure
 - `modules/cataas/operators/` : routes (`cat/*` images, `api/*` JSON, `upload.js`)
 - `modules/admin/` : modération (`operators/` list, image, actions ; `service/admin.js` garde d'accès + opérations)
-- `modules/cataas/service/` : `handleCatRequest.js`, `operations.js` (`findCat`, `editImage`, `createCat`…), `imageEditor.js` (sharp), `analytics.js`
+- `modules/cataas/service/` : `handleCatRequest.js`, `operations.js` (`findCat`, `editImage`, `createCat`…), `imageEditor.js` (sharp)
 - `modules/cataas/definitions/schemas.js` : schémas Zod
 - `modules/website/` : pages, middleware de cache (ETag/304), assets
 - `plugins/`, `prisma/` (schéma + migrations), `templates/` (pug, textes via `t('clé')`), `translations/` (fr, en : mêmes clés dans les deux fichiers)
@@ -45,7 +45,6 @@ Modèle `Cat` : `id` (uuid), `tags`, `file`, `mimetype`, `size`, `validated` (d�
 ## Pièges
 - `findCat({ id, tag })` : la route `/cat/{tag}` peut recevoir un tag, une liste de tags séparés par des virgules ou un UUID.
 - `z.coerce.boolean()` (`html`, `json`) transforme la chaîne `"false"` en `true`.
-- Analytics désactivé : l'appel à `sendAnalytic` est commenté dans `handleCatRequest.js`.
 - Le cache disque n'est jamais purgé ; l'ETag vaut `Date.now()` au démarrage (chaque redémarrage invalide les caches clients).
 - Le texte des légendes est injecté non échappé dans un SVG, et `cat.id`/`getUrl` sont injectés non échappés dans le HTML : attention à toute modification.
 - `sharp` est épinglé en 0.32.6.

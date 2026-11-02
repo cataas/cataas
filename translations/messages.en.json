@@ -170,5 +170,9 @@
     "title": "Page not found",
     "text": "This cat wandered off.",
     "back": "Back to home"
+  },
+  "meta": {
+    "title": "$t(home.title)",
+    "description": "$t(home.hero.lead)"
   }
 }

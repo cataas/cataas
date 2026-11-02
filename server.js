@@ -7,13 +7,9 @@ bootstrap({
   config: {
     application: {
       hostname: process.env.HOST || 'http://localhost',
-      metaTitle: 'Cat as a service (CATAAS)',
-      metaDescription: 'Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.',
+      metaTitle: 'meta.title',
+      metaDescription: 'meta.description',
       metaAuthor: 'Kevin Balicot <kevinbalicot@gmail.com>',
-      analytics: {
-        url: 'https://analytics.boutdecode.fr/getinfo',
-        websiteId: process.env.ANALYTICS_ID
-      },
     },
     cache: {
       'Cache-Control': 'public, max-age=' + (86400 * 30),
@@ -31,11 +27,11 @@ bootstrap({
       apiPrefix: '',
       info: {
         version: '1.0.0',
-        title: 'Cat as a service (CATAAS)',
-        description: 'Cat as a service (CATAAS) is a REST API to spread peace and love (or not) thanks to cats.',
+        title: 'CATAAS — Cat as a Service',
+        description: 'CATAAS — Cat as a Service — serves random cat images and GIFs, with text, filters and tags. One link, one cat. That\'s it.',
       },
       tags: [
-        { name: 'Cats', description: 'Cataas API' },
+        { name: 'Cats', description: 'CATAAS API' },
         { name: 'API', description: 'Public API' },
       ]
     },
