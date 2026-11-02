@@ -119,12 +119,13 @@ class ImageEditor {
     }
 
     if (text) {
-      const metadata = await sharpBuffer.metadata()
-      const compositeWidth = resizeOptions.width || metadata.width
-      const compositeHeight = resizeOptions.height || metadata.pageHeight || metadata.height
+      // metadata() sur un pipeline renvoie les dimensions de l'entrée, pas celles du rendu :
+      // on matérialise d'abord l'image redimensionnée pour superposer un calque de même taille
+      const { data, info } = await sharpBuffer.toBuffer({ resolveWithObject: true })
+      sharpBuffer = sharp(data, options).timeout({ seconds: 10 })
       sharpBuffer = sharpBuffer.composite([
         {
-          input: createTextSVG(text, { font, fontSize, fontColor, fontBackground, fontPosition, width: compositeWidth, height: compositeHeight }),
+          input: createTextSVG(text, { font, fontSize, fontColor, fontBackground, fontPosition, width: info.width, height: info.pageHeight || info.height }),
           tile: isAnimated
         }
       ])
