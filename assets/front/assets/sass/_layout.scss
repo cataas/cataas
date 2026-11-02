@@ -50,6 +50,10 @@
   }
 }
 
+@media (max-width: 720px) {
+  .hide-mobile { display: none !important; }
+}
+
 main { width: 100%; display: flex; flex-direction: column; align-items: center; flex: 1; }
 
 .site-footer {
