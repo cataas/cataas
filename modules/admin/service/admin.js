@@ -4,6 +4,8 @@ import path from 'node:path'
 
 import sharp from 'sharp'
 
+import { cacheRoot } from '../../cataas/service/operations.js'
+
 const digest = (value) => createHash('sha256').update(String(value)).digest()
 
 const safeEqual = (a, b) => timingSafeEqual(digest(a), digest(b))
@@ -88,26 +90,9 @@ export const updateTags = (store) => (id, tags) => store.cat.update({
 
 const imagesDir = () => path.resolve(process.cwd(), 'data', 'images')
 
-// Supprime tous les rendus en cache d'un chat (`id-<uuid>...`).
-// Le cache n'est jamais purgé et peut contenir des centaines de milliers de
-// fichiers : le parcours est asynchrone pour ne pas bloquer l'event loop.
-const purgeCache = async (id) => {
-  const cache = path.resolve(process.cwd(), 'data', 'cache', 'images')
-
-  let dir
-  try {
-    dir = await fsp.opendir(cache)
-  } catch (e) {
-    if (e.code === 'ENOENT') return
-    throw e
-  }
-
-  for await (const entry of dir) {
-    if (entry.name.startsWith(`id-${id}`)) {
-      await fsp.rm(path.join(cache, entry.name), { force: true })
-    }
-  }
-}
+// Supprime tous les rendus en cache d'un chat : un seul appel, quelle que soit
+// la taille du cache (un sous-dossier par chat)
+const purgeCache = (id) => fsp.rm(path.join(cacheRoot, path.basename(String(id))), { recursive: true, force: true })
 
 // Supprime la ligne, l'original et tous les rendus en cache
 export const deleteCat = (store) => async (id) => {

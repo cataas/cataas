@@ -1,8 +1,8 @@
-import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import path from 'node:path'
 import * as Sentry from '@sentry/node'
 
-import { findCat, editImage, getUrl, getId } from './operations.js'
+import { findCat, editImage, getUrl, getCacheKey, cacheRoot } from './operations.js'
 
 export default async ({ req, res, store }) => {
   const { html, json } = req.query
@@ -52,10 +52,11 @@ export default async ({ req, res, store }) => {
   }
 
   try {
-    const id = getId(cat.id, req.params.text, req.query)
-    const cachedImagePath = path.resolve(process.cwd(), 'data', 'cache', 'images', id)
-    if (fs.existsSync(cachedImagePath)) {
-      const file = fs.readFileSync(cachedImagePath)
+    const dir = path.join(cacheRoot, cat.id)
+    const cachedImagePath = path.join(dir, getCacheKey(req.params.text, req.query))
+
+    try {
+      const file = await fsp.readFile(cachedImagePath)
 
       res.setHeader('Content-Type', cat.mimetype)
       res.setHeader('Content-Length', file.length)
@@ -64,17 +65,23 @@ export default async ({ req, res, store }) => {
       res.end()
 
       return
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error
     }
 
     const imagePath = path.resolve(process.cwd(), 'data', 'images', cat.file)
-    const file = fs.readFileSync(imagePath)
+    const file = await fsp.readFile(imagePath)
     const buffer = await editImage(req, file, cat.mimetype)
 
     res.setHeader('Content-Type', cat.mimetype)
     res.setHeader('Content-Length', buffer.length)
 
     try {
-      fs.writeFileSync(cachedImagePath, buffer)
+      // Écriture atomique : jamais de rendu partiel servi à une requête concurrente
+      const tmp = `${cachedImagePath}.${process.pid}.${Date.now()}.tmp`
+      await fsp.mkdir(dir, { recursive: true })
+      await fsp.writeFile(tmp, buffer)
+      await fsp.rename(tmp, cachedImagePath)
     } catch (error) {
       Sentry.captureException(error)
     }

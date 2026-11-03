@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import sharp from 'sharp'
@@ -113,29 +113,29 @@ export const getUrl = (
   return url
 }
 
-export const getId = (
-  id,
+// Racine du cache des rendus : un sous-dossier par chat (`<cacheRoot>/<catId>/<clé>`)
+export const cacheRoot = path.resolve(process.cwd(), 'data', 'cache', 'images')
+
+// Clé de cache d'un rendu : hash de la variante (texte + query), longueur fixe
+export const getCacheKey = (
   text = null,
   queries = {},
 ) => {
-  let result = `id-${id}`
+  const parts = []
 
   if (text) {
-    result += `-says-${encodeURIComponent(text)}`
+    parts.push(`says-${encodeURIComponent(text)}`)
   }
 
-  const q = []
   for (const key in queries) {
     if (queries[key] && key !== 'html') {
-      q.push(`${key}-${encodeURIComponent(queries[key])}`)
+      parts.push(`${key}-${encodeURIComponent(queries[key])}`)
     }
   }
 
-  if (q.length > 0) {
-    result += `-${q.join('-')}`
-  }
-
-  return result
+  return parts.length > 0
+    ? createHash('sha256').update(parts.join('-')).digest('hex')
+    : 'original'
 }
 
 export const cats = (store) => ({ tags = [], limit, skip }) => {
