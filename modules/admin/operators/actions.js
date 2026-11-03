@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node'
 
-import { guard, validateCat, updateTags, deleteCat } from '../service/admin.js'
+import { guard, validateCat, updateTags, deleteCat, rotateCatLeft, rotateCatRight } from '../service/admin.js'
 
 export const context = 'app'
 
@@ -12,7 +12,9 @@ export const route = {
 const actions = {
   validate: (store, id) => validateCat(store)(id),
   tags: (store, id, body) => updateTags(store)(id, body.tags),
-  delete: (store, id) => deleteCat(store)(id)
+  delete: (store, id) => deleteCat(store)(id),
+  rotateLeft: (store, id) => rotateCatLeft(store)(id),
+  rotateRight: (store, id) => rotateCatRight(store)(id)
 }
 
 export const handler = async ({ req, res, store }) => {

@@ -170,6 +170,8 @@
     "validate": "Validate",
     "delete": "Delete",
     "refuse": "Refuse",
+    "rotate_left": "Rotate left",
+    "rotate_right": "Rotate right",
     "confirm_delete": "Permanently delete this image?",
     "badge_validated": "Validated",
     "badge_pending": "Pending",

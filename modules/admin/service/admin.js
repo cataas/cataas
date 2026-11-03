@@ -2,6 +2,8 @@ import { timingSafeEqual, createHash } from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 
+import sharp from 'sharp'
+
 const digest = (value) => createHash('sha256').update(String(value)).digest()
 
 const safeEqual = (a, b) => timingSafeEqual(digest(a), digest(b))
@@ -84,20 +86,43 @@ export const updateTags = (store) => (id, tags) => store.cat.update({
   }
 })
 
-// Supprime la ligne, l'original et tous les rendus en cache (`id-<uuid>...`)
-export const deleteCat = (store) => async (id) => {
-  const cat = await store.cat.delete({ where: { id } })
+const imagesDir = () => path.resolve(process.cwd(), 'data', 'images')
 
-  const images = path.resolve(process.cwd(), 'data', 'images')
+// Supprime tous les rendus en cache d'un chat (`id-<uuid>...`)
+const purgeCache = (id) => {
   const cache = path.resolve(process.cwd(), 'data', 'cache', 'images')
-
-  fs.rmSync(path.join(images, path.basename(cat.file)), { force: true })
 
   if (fs.existsSync(cache)) {
     fs.readdirSync(cache)
-      .filter(file => file.startsWith(`id-${cat.id}`))
+      .filter(file => file.startsWith(`id-${id}`))
       .forEach(file => fs.rmSync(path.join(cache, file), { force: true }))
   }
+}
+
+// Supprime la ligne, l'original et tous les rendus en cache
+export const deleteCat = (store) => async (id) => {
+  const cat = await store.cat.delete({ where: { id } })
+
+  fs.rmSync(path.join(imagesDir(), path.basename(cat.file)), { force: true })
+  purgeCache(cat.id)
 
   return cat
 }
+
+// Pivote l'original de 90° (`left` = sens antihoraire) et invalide les rendus
+const rotateCat = (angle) => (store) => async (id) => {
+  const cat = await store.cat.findUniqueOrThrow({ where: { id } })
+  const file = path.join(imagesDir(), path.basename(cat.file))
+
+  const buffer = await sharp(file, { animated: cat.mimetype === 'image/gif' })
+    .rotate(angle)
+    .toBuffer()
+
+  fs.writeFileSync(file, buffer)
+  purgeCache(cat.id)
+
+  return store.cat.update({ where: { id }, data: { size: buffer.length } })
+}
+
+export const rotateCatLeft = rotateCat(-90)
+export const rotateCatRight = rotateCat(90)

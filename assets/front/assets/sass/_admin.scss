@@ -15,7 +15,7 @@
   padding: 0;
   overflow: hidden;
 
-  img { width: 100%; height: 220px; object-fit: cover; display: block; }
+  img { width: 100%; height: auto; max-height: 360px; object-fit: contain; display: block; }
   &__body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
   &__meta { margin: 0; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
   &__tags { display: flex; gap: 8px; align-items: flex-end; .field { flex: 1; margin: 0; } input[type='text'] { font-size: 15px; padding: 10px 14px; min-height: 44px; } }

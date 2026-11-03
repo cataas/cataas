@@ -34,6 +34,10 @@ block content
                             button.btn.btn--ghost.btn--sm(type="submit")= t('admin_page.save')
 
                         div.admin-card__actions
+                            each rotation in [{ action: 'rotateLeft', icon: '↺', key: 'rotate_left' }, { action: 'rotateRight', icon: '↻', key: 'rotate_right' }]
+                                form(method="post", action=`/admin/cats/${cat.id}/${rotation.action}`)
+                                    input(type="hidden", name="return", value=here)
+                                    button.btn.btn--outline.btn--sm(type="submit", title=t(`admin_page.${rotation.key}`), aria-label=t(`admin_page.${rotation.key}`))= rotation.icon
                             if !cat.validated
                                 form(method="post", action=`/admin/cats/${cat.id}/validate`)
                                     input(type="hidden", name="return", value=here)
