@@ -55,6 +55,7 @@
       "custom": "Custom filter with brightness, lightness, saturation, hue, or r, g, b.",
       "size": "Resize with width and/or height.",
       "html": "Return an HTML page, handy for embedded previews.",
+      "avatar": "Return a square cat avatar, always the same for a given seed.",
       "json": "Return the cat as a JSON object.",
       "cats": "List cats as JSON (tags, skip, limit).",
       "tags": "List all available tags as JSON.",
@@ -66,6 +67,7 @@
       "title": "Paste it anywhere.",
       "lead": "An image tag is all you need. Combine text, size and filter right in the URL.",
       "resize": "Resize + filter",
+      "avatar": "Stable avatar per seed",
       "json": "JSON response",
       "uses": "CATAAS can be used for testing, placeholders, monitoring, education… whatever you need."
     },

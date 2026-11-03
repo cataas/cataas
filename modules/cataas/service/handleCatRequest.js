@@ -4,9 +4,9 @@ import * as Sentry from '@sentry/node'
 
 import { findCat, editImage, getUrl, getCacheKey, cacheRoot } from './operations.js'
 
-export default async ({ req, res, store }) => {
+export default async ({ req, res, store, rand }) => {
   const { html, json } = req.query
-  const cat = await findCat(store)(req.params)
+  const cat = await findCat(store)(req.params, { rand })
 
   if (!cat) {
     return res.send('Cat not found', 404)

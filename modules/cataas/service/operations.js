@@ -9,7 +9,21 @@ function random(min, max) {
   return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
 }
 
-export const findCat = (store) => async ({ id, tag }) => {
+// Seeded PRNG (sha256 of the seed -> mulberry32) with the same contract as random()
+export function seededRandom(seed) {
+  let state = createHash('sha256').update(String(seed)).digest().readUInt32BE(0)
+  const next = () => {
+    state = (state + 0x6D2B79F5) >>> 0
+    let t = state
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+
+  return (min, max) => Math.floor(next() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
+}
+
+export const findCat = (store) => async ({ id, tag }, { rand = random } = {}) => {
   const params = { validated: true }
   id = id ? id.split('.')[0] : tag
 
@@ -33,8 +47,9 @@ export const findCat = (store) => async ({ id, tag }) => {
 
     cat = await store.cat.findMany({
       where: search,
+      orderBy: { id: 'asc' },
       take: 1,
-      skip: random(0, count - 1)
+      skip: rand(0, count - 1)
     })
     cat = cat[0]
   } else {
@@ -45,8 +60,9 @@ export const findCat = (store) => async ({ id, tag }) => {
 
     cat = await store.cat.findMany({
       where: search,
+      orderBy: { id: 'asc' },
       take: 1,
-      skip: random(0, count - 1)
+      skip: rand(0, count - 1)
     })
     cat = cat[0]
   }

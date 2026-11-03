@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    - const endpoints = [ ['/cat', 'random'], ['/cat/:tag', 'tag', '/cat/orange,cute'], ['/cat/gif', 'gif'], ['/cat/says/:text', 'says', '/cat/says/hello'], ['/cat/:tag/says/:text', 'tagsays', '/cat/cute/says/hello'], ['/cat/says/:text?fontSize=50&fontColor=red', 'style', '/cat/says/hello?fontSize=50&fontColor=red'], ['/cat?type=square', 'type'], ['/cat?filter=mono', 'filter'], ['/cat?filter=custom&r=7&g=12&b=50', 'custom'], ['/cat?width=100&height=100', 'size', '/cat?width=100&height=100'], ['/cat?html=true', 'html'], ['/cat?json=true', 'json'], ['/api/cats?tags=cute', 'cats'], ['/api/tags', 'tags'] ]
+    - const endpoints = [ ['/cat', 'random'], ['/cat/:tag', 'tag', '/cat/orange,cute'], ['/cat/gif', 'gif'], ['/cat/says/:text', 'says', '/cat/says/hello'], ['/cat/:tag/says/:text', 'tagsays', '/cat/cute/says/hello'], ['/cat/says/:text?fontSize=50&fontColor=red', 'style', '/cat/says/hello?fontSize=50&fontColor=red'], ['/cat?type=square', 'type'], ['/cat?filter=mono', 'filter'], ['/cat?filter=custom&r=7&g=12&b=50', 'custom'], ['/cat?width=100&height=100', 'size', '/cat?width=100&height=100'], ['/cat?html=true', 'html'], ['/cat?json=true', 'json'], ['/avatar/:seed', 'avatar', '/avatar/alice'], ['/api/cats?tags=cute', 'cats'], ['/api/tags', 'tags'] ]
 
     section#top.container.hero
         div.hero__text
@@ -99,6 +99,9 @@ block content
                 |
                 | <span class="c">/* #{t('home.usage.json')} */</span>
                 | https://cataas.com/cat?json=true
+                |
+                | <span class="c">/* #{t('home.usage.avatar')} */</span>
+                | https://cataas.com/avatar/alice
 
     section#cli.container.section
         div.usage
