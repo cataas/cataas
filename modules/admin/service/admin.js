@@ -1,5 +1,5 @@
 import { timingSafeEqual, createHash } from 'node:crypto'
-import fs from 'node:fs'
+import fsp from 'node:fs/promises'
 import path from 'node:path'
 
 import sharp from 'sharp'
@@ -88,14 +88,24 @@ export const updateTags = (store) => (id, tags) => store.cat.update({
 
 const imagesDir = () => path.resolve(process.cwd(), 'data', 'images')
 
-// Supprime tous les rendus en cache d'un chat (`id-<uuid>...`)
-const purgeCache = (id) => {
+// Supprime tous les rendus en cache d'un chat (`id-<uuid>...`).
+// Le cache n'est jamais purgé et peut contenir des centaines de milliers de
+// fichiers : le parcours est asynchrone pour ne pas bloquer l'event loop.
+const purgeCache = async (id) => {
   const cache = path.resolve(process.cwd(), 'data', 'cache', 'images')
 
-  if (fs.existsSync(cache)) {
-    fs.readdirSync(cache)
-      .filter(file => file.startsWith(`id-${id}`))
-      .forEach(file => fs.rmSync(path.join(cache, file), { force: true }))
+  let dir
+  try {
+    dir = await fsp.opendir(cache)
+  } catch (e) {
+    if (e.code === 'ENOENT') return
+    throw e
+  }
+
+  for await (const entry of dir) {
+    if (entry.name.startsWith(`id-${id}`)) {
+      await fsp.rm(path.join(cache, entry.name), { force: true })
+    }
   }
 }
 
@@ -103,8 +113,8 @@ const purgeCache = (id) => {
 export const deleteCat = (store) => async (id) => {
   const cat = await store.cat.delete({ where: { id } })
 
-  fs.rmSync(path.join(imagesDir(), path.basename(cat.file)), { force: true })
-  purgeCache(cat.id)
+  await fsp.rm(path.join(imagesDir(), path.basename(cat.file)), { force: true })
+  await purgeCache(cat.id)
 
   return cat
 }
@@ -118,8 +128,8 @@ const rotateCat = (angle) => (store) => async (id) => {
     .rotate(angle)
     .toBuffer()
 
-  fs.writeFileSync(file, buffer)
-  purgeCache(cat.id)
+  await fsp.writeFile(file, buffer)
+  await purgeCache(cat.id)
 
   return store.cat.update({ where: { id }, data: { size: buffer.length } })
 }
