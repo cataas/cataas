@@ -62,7 +62,9 @@ class ImageEditor {
 
     if (isAnimated) {
       options.animated = true
-      options.pages = MAX_GIF_FRAMES
+      // libvips rejette (« bad page number ») un nombre de pages supérieur à celui du GIF
+      const { pages = 1 } = await sharp(buffer, { failOn: 'error', limitInputPixels: options.limitInputPixels }).metadata()
+      options.pages = Math.max(1, Math.min(pages, MAX_GIF_FRAMES))
     }
 
     if (type === 'square') {
@@ -128,7 +130,13 @@ class ImageEditor {
       // metadata() sur un pipeline renvoie les dimensions de l'entrée, pas celles du rendu :
       // on matérialise d'abord l'image redimensionnée pour superposer un calque de même taille
       const data = await sharpBuffer.toBuffer()
-      sharpBuffer = sharp(data, options).timeout({ seconds: 10 })
+      // Le rendu intermédiaire peut avoir moins de frames que l'original (recalcul des pages)
+      const textOptions = { ...options }
+      if (isAnimated) {
+        const { pages = 1 } = await sharp(data).metadata()
+        textOptions.pages = Math.max(1, Math.min(pages, MAX_GIF_FRAMES))
+      }
+      sharpBuffer = sharp(data, textOptions).timeout({ seconds: 10 })
       // pageHeight = hauteur d'une image (pour un GIF animé, height est la somme de toutes les images)
       const info = await sharpBuffer.metadata()
       sharpBuffer = sharpBuffer.composite([
