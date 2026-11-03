@@ -23,6 +23,9 @@ export function seededRandom(seed) {
   return (min, max) => Math.floor(next() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min)
 }
 
+// Les tags sont stockés et recherchés en minuscules (insensible à la casse)
+export const normalizeTag = (tag) => String(tag).trim().toLowerCase()
+
 export const findCat = (store) => async ({ id, tag }, { rand = random } = {}) => {
   const params = { validated: true }
   id = id ? id.split('.')[0] : tag
@@ -35,7 +38,7 @@ export const findCat = (store) => async ({ id, tag }, { rand = random } = {}) =>
     })
   } else if (id) {
     const query = decodeURIComponent(id).split(',').reduce((query, tag) => {
-      query.push({ tags: { has: tag } })
+      query.push({ tags: { has: normalizeTag(tag) } })
 
       return query
     }, [])
@@ -166,7 +169,7 @@ export const cats = (store) => ({ tags = [], limit, skip }) => {
 
   if (tags.length) {
     params.AND = tags.split(',').reduce((query, tag) => {
-      query.push({ tags: { has: tag } })
+      query.push({ tags: { has: normalizeTag(tag) } })
 
       return query
     }, [])
@@ -204,7 +207,7 @@ export const count = (store) => async () => {
 }
 
 export const createCat = (store) => async ({ file, tags }) => {
-  tags = tags.split(',').map(tag => tag.trim())
+  tags = [...new Set(tags.split(',').map(normalizeTag).filter(Boolean))]
 
   const isGif = file.mimeType === 'image/gif'
   const buffer = fs.readFileSync(file.filepath)

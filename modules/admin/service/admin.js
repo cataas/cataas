@@ -4,7 +4,7 @@ import path from 'node:path'
 
 import sharp from 'sharp'
 
-import { cacheRoot } from '../../cataas/service/operations.js'
+import { cacheRoot, normalizeTag } from '../../cataas/service/operations.js'
 
 const digest = (value) => createHash('sha256').update(String(value)).digest()
 
@@ -84,7 +84,7 @@ export const validateCat = (store) => (id) => store.cat.update({
 export const updateTags = (store) => (id, tags) => store.cat.update({
   where: { id },
   data: {
-    tags: [...new Set(String(tags || '').split(',').map(tag => tag.trim()).filter(Boolean))]
+    tags: [...new Set(String(tags || '').split(',').map(normalizeTag).filter(Boolean))]
   }
 })
 
