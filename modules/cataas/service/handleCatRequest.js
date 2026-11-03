@@ -58,6 +58,11 @@ export default async ({ req, res, store }) => {
     try {
       const file = await fsp.readFile(cachedImagePath)
 
+      // Rafraîchit l'âge (au plus une fois par jour) : le TTL vaut « dernier usage »
+      fsp.stat(cachedImagePath)
+        .then(({ mtimeMs }) => Date.now() - mtimeMs > 86400 * 1000 && fsp.utimes(cachedImagePath, new Date(), new Date()))
+        .catch(() => {})
+
       res.setHeader('Content-Type', cat.mimetype)
       res.setHeader('Content-Length', file.length)
 

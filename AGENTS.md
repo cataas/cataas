@@ -15,7 +15,7 @@ Point d'entrée : `server.js` → `bootstrap()` avec les plugins `sentry` et `st
 Docker : `./configure --env=dev --with-docker`, puis `make install` et `make start`.
 Sans Docker : `cp .env.dist .env`, `npx prisma generate`, `npx prisma migrate deploy`, créer `data/images/` et `data/cache/images/` (rien ne les crée), `npm run build`, `npm start`.
 
-Variables d'environnement : voir `.env.dist` (`DATABASE_URL`, `HOST`, `NODE_PORT`, `CORS`, `LOCALE`…) ; `SENTRY_DSN` et `SENTRY_SAMPLE_RATE` sont lues par `plugins/sentry.js` mais absentes de `.env.dist`. Ne jamais copier ni committer les secrets de `.env`.
+Variables d'environnement : voir `.env.dist` (`DATABASE_URL`, `HOST`, `NODE_PORT`, `CORS`, `LOCALE`…) ; `CACHE_TTL_DAYS` (30), `CACHE_MAX_MB` (2048) et `CACHE_SWEEP_MINUTES` (360) règlent le nettoyage du cache ; `SENTRY_DSN` et `SENTRY_SAMPLE_RATE` sont lues par `plugins/sentry.js` mais absentes de `.env.dist`. Ne jamais copier ni committer les secrets de `.env`.
 
 ## Structure
 - `modules/cataas/operators/` : routes (`cat/*` images, `api/*` JSON, `upload.js`)
@@ -45,7 +45,7 @@ Modèle `Cat` : `id` (uuid), `tags`, `file`, `mimetype`, `size`, `validated` (d�
 ## Pièges
 - `findCat({ id, tag })` : la route `/cat/{tag}` peut recevoir un tag, une liste de tags séparés par des virgules ou un UUID.
 - `z.coerce.boolean()` (`html`, `json`) transforme la chaîne `"false"` en `true`.
-- Le cache disque n'est purgé que par chat (suppression/rotation admin : `rm` du dossier) et reste non borné sinon ; les anciens fichiers plats `id-*` sont orphelins (`find data/cache/images -maxdepth 1 -type f -name 'id-*' -delete`) ; l'ETag vaut `Date.now()` au démarrage (chaque redémarrage invalide les caches clients).
+- Le cache disque est nettoyé périodiquement (`cacheSweeper.js` : TTL sur le dernier usage + plafond de taille, plus purge par chat à la suppression/rotation admin) ; l'ETag vaut `Date.now()` au démarrage (chaque redémarrage invalide les caches clients).
 - Le texte des légendes est injecté non échappé dans un SVG, et `cat.id`/`getUrl` sont injectés non échappés dans le HTML : attention à toute modification.
 - `sharp` est épinglé en 0.32.6.
 - `Dockerfile`, `Makefile`, `docker-compose.yaml` à la racine sont générés et gitignorés : modifier les gabarits dans `infrastructure/`.

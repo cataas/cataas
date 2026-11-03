@@ -1,6 +1,9 @@
 import sentry from './plugins/sentry.js'
 import store from './plugins/store.js'
 import { bootstrap } from '@boutdecode/yion'
+import { startCacheSweeper } from './modules/cataas/service/cacheSweeper.js'
+
+startCacheSweeper()
 
 bootstrap({
   plugins: [sentry, store],
