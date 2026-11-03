@@ -55,6 +55,7 @@
       "custom": "Filtre custom avec brightness, lightness, saturation, hue, ou r, g, b.",
       "size": "Redimensionner avec width et/ou height.",
       "html": "Renvoie une page HTML, pratique pour les aperçus intégrés.",
+      "placeholder": "Renvoie un chat recadré à la taille demandée (ou un fond uni avec color), légendé WxH.",
       "avatar": "Renvoie un avatar de chat carré, toujours le même pour un même identifiant.",
       "json": "Renvoie le chat sous forme d'objet JSON.",
       "cats": "Liste les chats en JSON (tags, skip, limit).",
@@ -67,6 +68,7 @@
       "title": "Collez-le n'importe où.",
       "lead": "Une balise image suffit. Combinez texte, taille et filtre directement dans l'URL.",
       "resize": "Redimensionnement + filtre",
+      "placeholder": "Placeholder à la taille voulue",
       "avatar": "Avatar stable par identifiant",
       "json": "Réponse JSON",
       "uses": "CATAAS peut servir pour des tests, des placeholders, du monitoring, de l'éducation… peu importe."

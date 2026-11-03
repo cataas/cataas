@@ -2,6 +2,7 @@ import fsp from 'node:fs/promises'
 import path from 'node:path'
 import * as Sentry from '@sentry/node'
 
+import { mimeByFormat } from './placeholder.js'
 import { findCat, editImage, getUrl, getCacheKey, cacheRoot } from './operations.js'
 
 export default async ({ req, res, store, rand }) => {
@@ -51,6 +52,8 @@ export default async ({ req, res, store, rand }) => {
     return res.end()
   }
 
+  const contentType = mimeByFormat[req.query.format] || cat.mimetype
+
   try {
     const dir = path.join(cacheRoot, cat.id)
     const cachedImagePath = path.join(dir, getCacheKey(req.params.text, req.query))
@@ -63,7 +66,7 @@ export default async ({ req, res, store, rand }) => {
         .then(({ mtimeMs }) => Date.now() - mtimeMs > 86400 * 1000 && fsp.utimes(cachedImagePath, new Date(), new Date()))
         .catch(() => {})
 
-      res.setHeader('Content-Type', cat.mimetype)
+      res.setHeader('Content-Type', contentType)
       res.setHeader('Content-Length', file.length)
 
       res.write(file)
@@ -78,7 +81,7 @@ export default async ({ req, res, store, rand }) => {
     const file = await fsp.readFile(imagePath)
     const buffer = await editImage(req, file, cat.mimetype)
 
-    res.setHeader('Content-Type', cat.mimetype)
+    res.setHeader('Content-Type', contentType)
     res.setHeader('Content-Length', buffer.length)
 
     try {

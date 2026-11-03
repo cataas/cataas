@@ -15,6 +15,8 @@ export const parameters = z.object({
   saturation: z.coerce.number().optional().openapi({ description: 'With custom filter, define saturation' }),
   hue: z.coerce.number().optional().openapi({ description: 'With custom filter, define hue' }),
   lightness: z.coerce.number().optional().openapi({ description: 'With custom filter, define lightness' }),
+  format: z.enum(['png', 'jpeg', 'webp', 'avif']).optional(),
+  quality: z.coerce.number().min(1).max(100).optional(),
   html: z.coerce.boolean().optional(),
   json: z.coerce.boolean().optional(),
 })

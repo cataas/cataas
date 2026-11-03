@@ -42,7 +42,9 @@ class ImageEditor {
       saturation = 1,
       hue = 0,
       lightness = 0,
-      blur
+      blur,
+      format,
+      quality
     }
   ) {
     const isAnimated = mimetype === 'image/gif'
@@ -133,7 +135,37 @@ class ImageEditor {
       ])
     }
 
+    if (format) {
+      sharpBuffer = sharpBuffer.toFormat(format, quality ? { quality: Number(quality) } : {})
+    }
+
     return sharpBuffer.toBuffer()
+  }
+
+  async solid (
+    width,
+    height,
+    color,
+    {
+      text = null,
+      font = 'impact',
+      fontSize = 30,
+      fontColor = 'white',
+      fontBackground = 'none',
+      format = 'png',
+      quality
+    } = {}
+  ) {
+    let image = sharp({ create: { width, height, channels: 4, background: color } })
+
+    if (text) {
+      // Même démarche que edit() : le calque doit avoir la taille du rendu
+      image = sharp(await image.png().toBuffer()).composite([
+        { input: createTextSVG(text, { font, fontSize, fontColor, fontBackground, width, height }) }
+      ])
+    }
+
+    return image.toFormat(format, quality ? { quality: Number(quality) } : {}).toBuffer()
   }
 
   readFile (path) {
