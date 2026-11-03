@@ -19,9 +19,7 @@ RUN npm run build
 RUN npx prisma generate
 RUN npm install -g --production --force --arch=x64 --os=linux --libc=musl sharp@0.32.6
 
-EXPOSE 8081
-
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-  CMD wget -q --spider "http://127.0.0.1:${NODE_PORT:-8080}/" || exit 1
+#HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+#  CMD wget -q --spider "http://127.0.0.1:${NODE_PORT:-8081}/" || exit 1
 
 CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
