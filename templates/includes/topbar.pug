@@ -12,5 +12,5 @@
             a.site-header__link.hide-mobile(href="/#usage")= t('nav.usage')
             a.site-header__link.hide-mobile(href="/#cli")= t('nav.cli')
             a.site-header__link.hide-mobile(href="/upload")= t('nav.upload')
-            a.btn.btn--outline(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank", rel="noopener")= t('nav.support')
-            a.btn.btn--primary.hide-mobile(href="/doc.html")= t('nav.docs')
+            a.btn.btn--outline(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank", rel="noopener", data-umami-event="support-project", data-umami-event-location="topbar")= t('nav.support')
+            a.btn.btn--primary.hide-mobile(href="/doc.html", data-umami-event="documentation", data-umami-event-location="topbar")= t('nav.docs')

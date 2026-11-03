@@ -80,7 +80,7 @@ block content
             article.card.endpoints__item
                 code.endpoints__path= t('home.api.more_title')
                 p.endpoints__desc= t('home.api.more_desc')
-                a.btn.btn--primary.btn--sm.endpoints__try(href="/doc.html")= t('home.api.more_link')
+                a.btn.btn--primary.btn--sm.endpoints__try(href="/doc.html", data-umami-event="documentation", data-umami-event-location="home-api")= t('home.api.more_link')
 
     section#usage.container.section
         div.usage
@@ -134,4 +134,4 @@ block content
     section.container.section
         div.cta
             h2= t('home.cta.title')
-            a.btn.btn--dark(href="/doc.html")= t('home.cta.button')
+            a.btn.btn--dark(href="/doc.html", data-umami-event="documentation", data-umami-event-location="home-cta")= t('home.cta.button')
