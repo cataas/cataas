@@ -3,7 +3,7 @@
     "title": "CATAAS — Cat as a Service",
     "hero": {
       "badge": "Gratuit · Sans clé d'API · Open source",
-      "title_a": "Des chats,",
+      "title_a": "API de chats,",
       "title_b": "à partir d'une simple",
       "title_c": "URL",
       "lead": "CATAAS — Cat as a Service — sert des images et GIFs de chats aléatoires, avec texte, filtres et tags. Un lien, un chat. C'est tout.",
