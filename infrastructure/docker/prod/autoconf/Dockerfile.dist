@@ -22,7 +22,7 @@ RUN npm install -g --production --force --arch=x64 --os=linux --libc=musl sharp@
 # Threads libuv : partagés avec les lectures de fichiers ; arènes malloc limitées (fragmentation musl)
 ENV UV_THREADPOOL_SIZE=16 MALLOC_ARENA_MAX=2 NODE_OPTIONS=--max-old-space-size=1024
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-  CMD wget -q --spider "http://127.0.0.1:${NODE_PORT:-8081}/api/count" || exit 1
+#HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+#  CMD wget -q --spider "http://127.0.0.1:${NODE_PORT:-8081}/api/count" || exit 1
 
 CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]
