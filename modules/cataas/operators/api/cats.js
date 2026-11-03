@@ -11,7 +11,7 @@ export const route = {
 
 export const input = {
   query: z.object({
-    limit: z.coerce.number().default(10),
+    limit: z.coerce.number().int().min(1).max(100).default(10),
     skip: z.coerce.number().default(0),
     tags: z.string().optional()
   })

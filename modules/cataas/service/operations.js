@@ -132,6 +132,13 @@ export const getUrl = (
 // Racine du cache des rendus : un sous-dossier par chat (`<cacheRoot>/<catId>/<clé>`)
 export const cacheRoot = path.resolve(process.cwd(), 'data', 'cache', 'images')
 
+// Paramètres de query qui influencent le rendu : tout le reste (?cb=…, ?_=…) est ignoré de la clé
+const CACHE_KEY_PARAMS = [
+  'type', 'filter', 'fit', 'position', 'width', 'height', 'blur', 'r', 'g', 'b',
+  'brightness', 'saturation', 'hue', 'lightness', 'format', 'quality',
+  'font', 'fontSize', 'fontColor', 'fontBackground', 'size'
+]
+
 // Clé de cache d'un rendu : hash de la variante (texte + query), longueur fixe
 export const getCacheKey = (
   text = null,
@@ -143,8 +150,8 @@ export const getCacheKey = (
     parts.push(`says-${encodeURIComponent(text)}`)
   }
 
-  for (const key in queries) {
-    if (queries[key] && key !== 'html') {
+  for (const key of CACHE_KEY_PARAMS) {
+    if (queries[key]) {
       parts.push(`${key}-${encodeURIComponent(queries[key])}`)
     }
   }

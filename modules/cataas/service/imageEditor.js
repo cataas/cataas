@@ -1,7 +1,10 @@
 // const jimp = require('jimp')
 import sharp from 'sharp'
 
-sharp.concurrency(process.env.UV_THREADPOOL_SIZE || 8)
+sharp.concurrency(Number(process.env.SHARP_CONCURRENCY) || 2)
+// Cache libvips borné : il ne sert à rien ici (un rendu = une image), et il garde de la RAM
+sharp.cache({ memory: 50, files: 0, items: 50 })
+const MAX_GIF_FRAMES = Number(process.env.MAX_GIF_FRAMES) || 150
 /*sharp.queue.on('change', function(queueLength) {
   const { queue, process } = sharp.counters()
   console.log(`queue: ${queue}, processing: ${process}`)
@@ -48,7 +51,7 @@ class ImageEditor {
     }
   ) {
     const isAnimated = mimetype === 'image/gif'
-    const options = { failOn: 'error' }
+    const options = { failOn: 'error', limitInputPixels: 50_000_000 }
     const resizeOptions = {
       width,
       height,
@@ -59,6 +62,7 @@ class ImageEditor {
 
     if (isAnimated) {
       options.animated = true
+      options.pages = MAX_GIF_FRAMES
     }
 
     if (type === 'square') {
@@ -134,6 +138,9 @@ class ImageEditor {
         }
       ])
     }
+
+    // AVIF sur un GIF animé : trop coûteux en CPU/RAM, repli sur webp
+    if (format === 'avif' && isAnimated) format = 'webp'
 
     if (format) {
       sharpBuffer = sharpBuffer.toFormat(format, quality ? { quality: Number(quality) } : {})

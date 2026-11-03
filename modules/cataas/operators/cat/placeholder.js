@@ -2,6 +2,7 @@ import { z } from '@boutdecode/open-api'
 
 import { parameters, textParameters } from '../../definitions/schemas.js'
 import handleCatRequest from '../../service/handleCatRequest.js'
+import renderQueue, { QueueFullError } from '../../service/renderQueue.js'
 import ImageEditor from '../../service/imageEditor.js'
 import { defaultFontSize, escapeXml, mimeByFormat, parsePlaceholderSize } from '../../service/placeholder.js'
 
@@ -60,7 +61,8 @@ export const handler = async (ctx) => {
     const color = /^[0-9a-fA-F]+$/.test(query.color) ? `#${query.color}` : query.color
     let buffer
     try {
-      buffer = await ImageEditor.solid(width, height, color, {
+      const key = JSON.stringify([width, height, color, label, fontSize, query.font, query.fontColor, query.fontBackground, format, query.quality])
+      buffer = await renderQueue.run(`solid:${key}`, () => ImageEditor.solid(width, height, color, {
         text: label,
         fontSize,
         font: query.font,
@@ -68,13 +70,19 @@ export const handler = async (ctx) => {
         fontBackground: query.fontBackground,
         format,
         quality: query.quality
-      })
+      }))
     } catch (error) {
+      if (error instanceof QueueFullError) {
+        res.setHeader('Retry-After', '2')
+        return res.send('Service busy, retry shortly', 503)
+      }
+
       return res.send('Invalid color', 400)
     }
 
     res.setHeader('Content-Type', mimeByFormat[format || 'png'])
     res.setHeader('Content-Length', buffer.length)
+    res.setHeader('Cache-Control', 'public, max-age=86400')
     res.write(buffer)
     return res.end()
   }
