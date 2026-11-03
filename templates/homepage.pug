@@ -29,10 +29,15 @@ block content
         )
             div.demo__stage(data-stage)
                 img(data-image, alt=t('home.demo.alt'))
-            div.demo__group
-                label.demo__label(for="demo-text")= t('home.demo.text')
-                div.field(style="margin:0")
-                    input#demo-text(type="text", value="Hello World!", maxlength="40", data-text, autocomplete="off")
+            div.demo__row
+                div.demo__group.demo__group--grow
+                    label.demo__label(for="demo-text")= t('home.demo.text')
+                    div.field(style="margin:0")
+                        input#demo-text(type="text", value="Meow", maxlength="40", data-text, autocomplete="off")
+                div.demo__group.demo__group--tag
+                    label.demo__label(for="demo-tag")= t('home.demo.tag')
+                    div.field(style="margin:0")
+                        input#demo-tag(type="text", value="cute", maxlength="40", data-tag, autocomplete="off")
             div.demo__group
                 span.demo__label= t('home.demo.filter')
                 div.demo__chips
@@ -59,8 +64,8 @@ block content
             div.stats__value 0 keys
             div.stats__label= t('home.stats.keys')
         div.stats__item
-            div.stats__value JPG · PNG · GIF
-            div.stats__label= t('home.stats.formats')
+            div.stats__value 100% cat
+            div.stats__label= t('home.stats.dogs')
 
     section#api.container.section
         div.heading

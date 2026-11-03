@@ -7,6 +7,7 @@ export function initDemo (root = document.querySelector('[data-demo]')) {
   const stage = root.querySelector('[data-stage]')
   const image = root.querySelector('[data-image]')
   const text = root.querySelector('[data-text]')
+  const tag = root.querySelector('[data-tag]')
   const urlBox = root.querySelector('[data-url]')
   const copyButton = root.querySelector('[data-copy-url]')
   const state = { filter: 'none', format: 'default' }
@@ -15,7 +16,9 @@ export function initDemo (root = document.querySelector('[data-demo]')) {
   const publicUrl = () => {
     const value = text.value.trim()
     const gif = state.format === 'gif'
-    let path = gif ? '/cat/gif' : '/cat'
+    const tags = [gif ? 'gif' : '', ...tag.value.split(',').map((t) => t.trim())].filter(Boolean)
+    let path = '/cat'
+    if (tags.length) path += '/' + tags.map(encodeURIComponent).join(',')
     if (value) path += '/says/' + encodeURIComponent(value)
     const params = []
     if (FILTERS[state.filter]) params.push(FILTERS[state.filter])
@@ -42,6 +45,7 @@ export function initDemo (root = document.querySelector('[data-demo]')) {
   })
 
   text.addEventListener('input', schedule)
+  tag.addEventListener('input', schedule)
 
   for (const [attr, key] of [['data-filter', 'filter'], ['data-format', 'format']]) {
     root.querySelectorAll(`[${attr}]`).forEach((button) => {

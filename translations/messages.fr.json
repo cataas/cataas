@@ -13,6 +13,7 @@
     "demo": {
       "alt": "Un chat aléatoire",
       "text": "Texte sur l'image",
+      "tag": "Tag",
       "filter": "Filtre",
       "format": "Format",
       "another": "Un autre chat",
@@ -38,7 +39,6 @@
       "cats": "Chats servis",
       "free": "Sans abonnement",
       "keys": "Sans inscription",
-      "formats": "Formats disponibles",
       "dogs": "Zéro chien, promis"
     },
     "api": {

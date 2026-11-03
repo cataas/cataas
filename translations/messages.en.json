@@ -13,6 +13,7 @@
     "demo": {
       "alt": "A random cat",
       "text": "Text on the image",
+      "tag": "Tag",
       "filter": "Filter",
       "format": "Format",
       "another": "Another cat",
@@ -38,7 +39,6 @@
       "cats": "Cats served",
       "free": "No subscription",
       "keys": "No sign-up required",
-      "formats": "Available formats",
       "dogs": "Zero dogs, promise"
     },
     "api": {

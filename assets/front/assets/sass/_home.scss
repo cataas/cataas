@@ -34,6 +34,9 @@
     &.is-loading img { opacity: .4; }
   }
   &__group { display: flex; flex-direction: column; gap: 8px; }
+  &__row { display: flex; gap: 12px; }
+  &__group--grow { flex: 1 1 0; min-width: 0; }
+  &__group--tag { flex: 0 1 140px; min-width: 0; }
   &__label { font-size: 13px; color: var(--muted); font-weight: 500; }
   &__chips { display: flex; flex-wrap: wrap; gap: 8px; }
   &__url { display: flex; align-items: center; gap: 12px; }
