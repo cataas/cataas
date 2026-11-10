@@ -14,7 +14,7 @@
   },
   "private": true,
   "author": "Kevin Balicot <kevinbalicot@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "@boutdecode/yion": "^2.0.0",
