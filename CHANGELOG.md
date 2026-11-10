@@ -1,3 +1,46 @@
+# [3.0.0](https://github.com/cataas/cataas/compare/v2.4.1...v3.0.0) (2026-11-10)
+
+
+### Bug Fixes
+
+* add Prisma musl binary target for Docker ([253a96b](https://github.com/cataas/cataas/commit/253a96bbecf677fd9dced25dd452d453929e018e))
+* Analytic URL ([1238709](https://github.com/cataas/cataas/commit/1238709d1823499d925688d0faf2596e0d3d8a51))
+* bound GIF page count to the actual frame count ([22a9539](https://github.com/cataas/cataas/commit/22a9539ad2cd30b7e3e7068e87ce5aec7ae5fcdb))
+* Disable analytics ([68fd025](https://github.com/cataas/cataas/commit/68fd025be9ec15645de31d50497f9b0a0f851b79))
+* generate prisma client and run migrations in prod image ([ff7bc00](https://github.com/cataas/cataas/commit/ff7bc00db9417cc1d72600b5bfaff0d224a94f3b))
+* html and json query ([44de286](https://github.com/cataas/cataas/commit/44de286a30a7280034cc3ad714d4f5198ac4b020))
+* keep text on animated gifs after resize ([699bd9a](https://github.com/cataas/cataas/commit/699bd9afaa9090112c83c38c0061e66f8bcf6468))
+* limit memory usage under heavy traffic ([c14d3c2](https://github.com/cataas/cataas/commit/c14d3c23e2c6c59fbda092acc434d7c0bcfa8b84))
+* make tags case-insensitive ([58bce74](https://github.com/cataas/cataas/commit/58bce74954bb35b788e0c31d72641b1b68702eb9))
+* purge admin image cache asynchronously to avoid blocking the server ([986eda2](https://github.com/cataas/cataas/commit/986eda28344445b9fe7f38e3a986e671c6b29960))
+* size text overlay from resized image ([7276792](https://github.com/cataas/cataas/commit/72767920792212d41cee8c09af2bf5d2a22caef5))
+* store image cache per cat for instant purge ([d414257](https://github.com/cataas/cataas/commit/d414257d98ac8f1bc6eb93acc642e0ef773e2dd8))
+* Tag query ([9e3104c](https://github.com/cataas/cataas/commit/9e3104c4b0c74afce2c8009048a4693ba0c06ca3))
+* Typo into title ([f13133c](https://github.com/cataas/cataas/commit/f13133c63d3455506bee7c7c349970b43a8ef9ce))
+
+
+### Features
+
+* add /avatar/{seed} stable cat avatars ([f42c1bb](https://github.com/cataas/cataas/commit/f42c1bb4dec787b4af41a8bc8c53050366922858))
+* add /placeholder/{size} with cat or solid color background ([49cfc70](https://github.com/cataas/cataas/commit/49cfc70eb4361d2d6d7930427200ba7722a432cf))
+* add CLI section on homepage ([90a5112](https://github.com/cataas/cataas/commit/90a511239cb3d33b7dafbb82b7c6d6affd279e1b))
+* add moderation admin ([ebba215](https://github.com/cataas/cataas/commit/ebba215cc4baa7f8c04885f1d25770f47a306252))
+* add rotate buttons to admin and keep image ratio ([c241257](https://github.com/cataas/cataas/commit/c241257d711b2781de717a02c481533607cbf046))
+* add tag field to demo and show 100% cat stat ([64f2adf](https://github.com/cataas/cataas/commit/64f2adf0f4362c4b89fdea38d96ce030c1a931cc))
+* add Umami analytics and click events on support/docs links ([1f01aa4](https://github.com/cataas/cataas/commit/1f01aa4556f3e67984495166b1b3c53363fe327e))
+* bound image cache with TTL and size cap ([7aed229](https://github.com/cataas/cataas/commit/7aed229260d1256d1a6ede1b12ce6002dd75e495))
+* hide header links on mobile except support button ([d626174](https://github.com/cataas/cataas/commit/d6261748ab43161e043a52c05b869343be8a5a96))
+* new interface ([b0122d4](https://github.com/cataas/cataas/commit/b0122d4c13f3bca90ab17295bdb0f85e3887cbd8))
+* release v3 ([9e2778a](https://github.com/cataas/cataas/commit/9e2778aa4fb840abd9d474a9b9a5ffd01dc7719d))
+* V3 ([0280329](https://github.com/cataas/cataas/commit/0280329f843f84b05c2c1abef0b2a1f9b7b48efe))
+
+
+### BREAKING CHANGES
+
+* v3 major release (new front end, admin moderation, validated uploads, MIT license for the code).
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
 ## [2.4.1](https://github.com/cataas/cataas/compare/v2.4.0...v2.4.1) (2025-01-30)
 
 
