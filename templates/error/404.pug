@@ -1,4 +1,7 @@
 extends ../layout
 
 block content
-    h1 404
+    section.container.not-found
+        h1 404
+        p.lead= t('error_404.text')
+        a.btn.btn--primary(href="/")= t('error_404.back')

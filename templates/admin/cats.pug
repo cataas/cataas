@@ -1,0 +1,66 @@
+extends ../layout
+
+block analytics
+
+block content
+    - const here = `/admin?status=${status}&page=${page}`
+    section.container.section
+        header.page-head
+            h1= t('admin_page.title')
+            div.tabs
+                each key in ['pending', 'validated', 'all']
+                    a.chip(href=`/admin?status=${key}`, class=status === key ? 'is-active' : '')= t(`admin_page.${key}`)
+
+        p.text-muted= t('admin_page.count', { count: total })
+
+        if cats.length === 0
+            p.alert= t('admin_page.empty')
+
+        div.admin-grid
+            each cat in cats
+                article.card.admin-card
+                    img(src=`/admin/images/${cat.id}`, alt=cat.tags.join(', '), loading="lazy")
+                    div.admin-card__body
+                        p.admin-card__meta
+                            | #{cat.mimetype} · #{Math.round(cat.size / 1024)} #{t('admin_page.kb')} · #{cat.createdAt.toISOString().slice(0, 10)}
+                            if cat.validated
+                                span.badge= t('admin_page.badge_validated')
+                            else
+                                span.badge.badge--pending= t('admin_page.badge_pending')
+
+                        form.admin-card__tags(method="post", action=`/admin/cats/${cat.id}/tags`)
+                            input(type="hidden", name="return", value=here)
+                            div.field
+                                label(for=`tags-${cat.id}`)= t('admin_page.tags')
+                                input(type="text", name="tags", id=`tags-${cat.id}`, value=cat.tags.join(', '))
+                            button.btn.btn--ghost.btn--sm(type="submit")= t('admin_page.save')
+
+                        div.admin-card__actions
+                            each rotation in [{ action: 'rotateLeft', icon: '↺', key: 'rotate_left' }, { action: 'rotateRight', icon: '↻', key: 'rotate_right' }]
+                                form(method="post", action=`/admin/cats/${cat.id}/${rotation.action}`)
+                                    input(type="hidden", name="return", value=here)
+                                    button.btn.btn--outline.btn--sm(type="submit", title=t(`admin_page.${rotation.key}`), aria-label=t(`admin_page.${rotation.key}`))= rotation.icon
+                            if !cat.validated
+                                form(method="post", action=`/admin/cats/${cat.id}/validate`)
+                                    input(type="hidden", name="return", value=here)
+                                    button.btn.btn--primary.btn--sm(type="submit")= t('admin_page.validate')
+                            form(method="post", action=`/admin/cats/${cat.id}/delete`, data-confirm=t('admin_page.confirm_delete'))
+                                input(type="hidden", name="return", value=here)
+                                button.btn.btn--danger.btn--sm(type="submit")= cat.validated ? t('admin_page.delete') : t('admin_page.refuse')
+
+        if pages > 1
+            //- Fenêtre autour de la page courante : 1 … 4 5 [6] 7 8 … 70
+            - const shown = [...new Set([1, pages, ...Array.from({ length: 5 }, (_, i) => page - 2 + i)])].filter(n => n >= 1 && n <= pages).sort((a, b) => a - b)
+            - const href = n => `/admin?status=${status}&page=${n}`
+            nav(aria-label=t('admin_page.pagination'))
+                ul.pagination
+                    li(class=page <= 1 ? 'is-disabled' : '')
+                        a(href=href(page - 1))= t('admin_page.previous')
+                    each n, index in shown
+                        if index > 0 && n - shown[index - 1] > 1
+                            li.is-disabled
+                                span …
+                        li(class=n === page ? 'is-active' : '')
+                            a(href=href(n))= n
+                    li(class=page >= pages ? 'is-disabled' : '')
+                        a(href=href(page + 1))= t('admin_page.next')

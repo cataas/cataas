@@ -1,56 +1,55 @@
-const Sentry = require('@sentry/node')
+import sentry from './plugins/sentry.js'
+import store from './plugins/store.js'
+import { bootstrap } from '@boutdecode/yion'
+import { startCacheSweeper } from './modules/cataas/service/cacheSweeper.js'
 
-const { createApi } = require('@tamia-web/tamia')
-const apiDocPlugin = require('@tamia-web/doc-plugin')
-const { createApp, createServer } = require('yion')
-const bodyParser = require('yion-body-parser')
-const sessionPlugin = require('@boutdecode/session/yion/session-plugin')
-const i18nPlugin = require('@boutdecode/i18n/yion/i18n-plugin')
-const encodingPlugin = require('@boutdecode/encoding/yion/encoding-plugin')
+startCacheSweeper()
 
-const routerPlugin = require('./src/shared/yion/plugin/router')
-const renderPlugin = require('./src/shared/yion/plugin/render')
-const apiConfigGenerator = require('./src/shared/api/config-generator')
-const moduleLoader = require('./src/shared/configuration/module-loader')
-
-require('./config/config')
-
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  tracesSampleRate: process.env.SENTRY_SAMPLE_RATE || 1.0,
-  profilesSampleRate: process.env.SENTRY_SAMPLE_RATE || 1.0,
-})
-
-moduleLoader.configure()
-
-const app = createApp()
-const server = createServer(app, [renderPlugin, routerPlugin, sessionPlugin, i18nPlugin, encodingPlugin, bodyParser])
-app.api = createApi(apiConfigGenerator.config, { prefix: '', plugins: [apiDocPlugin('')] })
-
-app.use((req, res, next) => {
-  try {
-    next()
-  } catch (e) {
-    Sentry.captureException(e)
-    next()
+bootstrap({
+  plugins: [sentry, store],
+  config: {
+    application: {
+      hostname: process.env.HOST || 'http://localhost',
+      metaTitle: 'meta.title',
+      metaDescription: 'meta.description',
+      metaAuthor: 'Kevin Balicot <kevinbalicot@gmail.com>',
+    },
+    cache: {
+      'Cache-Control': 'public, max-age=' + (86400 * 30),
+      'Content-Encoding': 'gzip',
+      ETag: Date.now(),
+      Vary: 'Accept-Encoding'
+    },
+    assets: true,
+    cors: {
+      origin: process.env.CORS || '*',
+      headers: 'X-Requested-With, Content-Type, Accept, Origin, Authorization',
+      methods: 'GET, POST, PUT, DELETE, OPTIONS'
+    },
+    api: {
+      apiPrefix: '',
+      info: {
+        version: '1.0.0',
+        title: 'CATAAS — Cat as a Service',
+        description: 'CATAAS — Cat as a Service — serves random cat images and GIFs, with text, filters and tags. One link, one cat. That\'s it.',
+      },
+      tags: [
+        { name: 'Cats', description: 'CATAAS API' },
+        { name: 'API', description: 'Public API' },
+      ]
+    },
+    view: {
+      render: 'pug',
+      folder: 'templates',
+      globals: {}
+    },
+    translation: {
+      fallback: process.env.LOCALE,
+      locales: ['fr', 'en']
+    },
+    modules: {
+      modules: ['website', 'cataas', 'admin'],
+      folder: 'modules'
+    }
   }
 })
-
-moduleLoader.load(app)
-
-app.group('')
-  .use((req, res, next) => {
-    res.set('Access-Control-Allow-Origin', process.env.CORS || '*' )
-    res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-
-    if (req.method === 'OPTIONS') {
-      return res.send()
-    }
-
-    next()
-  })
-  .use(app.api.middleware)
-
-server.listen(process.env.NODE_PORT)
-    .on('listening', () => console.log(`🤖 Server starting on port ${process.env.NODE_PORT}.`))

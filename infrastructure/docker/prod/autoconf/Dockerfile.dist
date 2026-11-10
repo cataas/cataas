@@ -1,4 +1,4 @@
-FROM alpine:3.18 AS node-alpine-3-19
+FROM node:23-alpine3.20 AS node-23-alpine-3-20
 
 RUN apk add --upgrade --no-cache nodejs npm libuv
 RUN apk add --upgrade --no-cache bash
@@ -7,15 +7,22 @@ RUN apk add --upgrade --no-cache gcompat
 RUN apk add --upgrade --no-cache msttcorefonts-installer
 RUN update-ms-fonts
 
-RUN mkdir -p /home/app
+RUN mkdir -p /home/app /home/app/data/images /home/app/data/cache/images
 WORKDIR /home/app
 
 COPY . /home/app
 
 RUN npm install
 RUN npm run build
-RUN rm -rf node_modules
-RUN npm install --production
+
+# prisma est en dependencies : génération du client et migrations en prod
+RUN npx prisma generate
 RUN npm install -g --production --force --arch=x64 --os=linux --libc=musl sharp@0.32.6
 
-CMD ["npm", "start"]
+# Threads libuv : partagés avec les lectures de fichiers ; arènes malloc limitées (fragmentation musl)
+ENV UV_THREADPOOL_SIZE=16 MALLOC_ARENA_MAX=2 NODE_OPTIONS=--max-old-space-size=1024
+
+#HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+#  CMD wget -q --spider "http://127.0.0.1:${NODE_PORT:-8081}/api/count" || exit 1
+
+CMD ["sh", "-c", "npx prisma migrate deploy && npm start"]

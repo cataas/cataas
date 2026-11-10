@@ -1,15 +1,15 @@
-const configurator = require('../configuration/configurator')
 const Datastore = require('nedb')
 
 const config = {
   get dataFolder () {
-    return configurator.get('data.dataFolder')
+    return 'data'
   },
 
   get stores () {
-    return configurator.get('data.stores', [])
+    return ['cats']
   }
 }
+
 const stores = {}
 const getCollection = (name) => {
   if (!config.stores.includes(name)) {
@@ -17,7 +17,7 @@ const getCollection = (name) => {
   }
 
   if (!stores[name]) {
-    stores[name] = new Datastore({ filename: `${config.dataFolder}/${name}_${process.env.APP_ENV}.db`, autoload: true })
+    stores[name] = new Datastore({ filename: `${config.dataFolder}/${name}_production.db`, autoload: true })
   }
 
   return stores[name]

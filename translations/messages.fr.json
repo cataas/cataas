@@ -1,19 +1,108 @@
 {
-  "home": "Accueil",
+  "home": {
+    "title": "CATAAS — Cat as a Service",
+    "hero": {
+      "badge": "Gratuit · Sans clé d'API · Open source",
+      "title_a": "API de chats,",
+      "title_b": "à partir d'une simple",
+      "title_c": "URL",
+      "lead": "CATAAS — Cat as a Service — sert des images et GIFs de chats aléatoires, avec texte, filtres et tags. Un lien, un chat. C'est tout.",
+      "try": "Essayer",
+      "endpoints": "Voir les endpoints"
+    },
+    "demo": {
+      "alt": "Un chat aléatoire",
+      "text": "Texte sur l'image",
+      "tag": "Tag",
+      "filter": "Filtre",
+      "format": "Format",
+      "another": "Un autre chat",
+      "copy": "Copier",
+      "copied": "Copié !",
+      "error": "Impossible de charger un chat, réessayez.",
+      "filters": {
+        "none": "Aucun",
+        "mono": "Mono",
+        "negate": "Négatif",
+        "blur": "Flou"
+      },
+      "formats": {
+        "default": "Défaut",
+        "square": "Carré",
+        "medium": "Moyen",
+        "small": "Petit",
+        "xsmall": "Très petit",
+        "gif": "GIF"
+      }
+    },
+    "stats": {
+      "cats": "Chats servis",
+      "free": "Sans abonnement",
+      "keys": "Sans inscription",
+      "dogs": "Zéro chien, promis"
+    },
+    "api": {
+      "title": "Quelques endpoints, mille possibilités.",
+      "try": "Essayer",
+      "random": "Un chat aléatoire, en image.",
+      "tag": "Un chat aléatoire correspondant à un tag. Combinez-en plusieurs avec des virgules.",
+      "gif": "Un chat animé aléatoire, en GIF.",
+      "says": "Un chat aléatoire qui dit le texte.",
+      "tagsays": "Un chat aléatoire avec un tag, qui dit le texte.",
+      "style": "Personnalisez le texte avec fontSize et fontColor.",
+      "type": "Taille de l'image : xsmall, small, medium ou square.",
+      "filter": "Appliquer un filtre : blur, mono, negate ou custom.",
+      "custom": "Filtre custom avec brightness, lightness, saturation, hue, ou r, g, b.",
+      "size": "Redimensionner avec width et/ou height.",
+      "html": "Renvoie une page HTML, pratique pour les aperçus intégrés.",
+      "placeholder": "Renvoie un chat recadré à la taille demandée (ou un fond uni avec color), légendé WxH.",
+      "avatar": "Renvoie un avatar de chat carré, toujours le même pour un même identifiant.",
+      "json": "Renvoie le chat sous forme d'objet JSON.",
+      "cats": "Liste les chats en JSON (tags, skip, limit).",
+      "tags": "Liste tous les tags disponibles en JSON.",
+      "more_title": "Encore plus de possibilités",
+      "more_desc": "Polices, positions, ajustement, filtres personnalisés et plus : tous les paramètres sont dans la documentation complète.",
+      "more_link": "Lire la documentation"
+    },
+    "usage": {
+      "title": "Collez-le n'importe où.",
+      "lead": "Une balise image suffit. Combinez texte, taille et filtre directement dans l'URL.",
+      "resize": "Redimensionnement + filtre",
+      "placeholder": "Placeholder à la taille voulue",
+      "avatar": "Avatar stable par identifiant",
+      "json": "Réponse JSON",
+      "uses": "CATAAS peut servir pour des tests, des placeholders, du monitoring, de l'éducation… peu importe."
+    },
+    "cli": {
+      "title": "Des chats dans votre terminal.",
+      "lead": "Le CLI CATAAS affiche des chats directement dans votre terminal, avec les mêmes tags, textes et filtres que l'API.",
+      "modes": "Images pleine résolution sur Kitty et iTerm2, demi-blocs colorés partout ailleurs, GIF animés inclus.",
+      "github": "Voir sur GitHub",
+      "install": "Installation (Linux / macOS)",
+      "random": "Un chat aléatoire avec des tags",
+      "text": "Texte et filtre",
+      "gif": "Un chat animé",
+      "tags": "Lister les tags disponibles"
+    },
+    "cta": {
+      "title": "Prêt à ajouter des chats à votre projet ?",
+      "button": "Lire la documentation",
+      "donate": "Offrez-moi une bière 🍺"
+    }
+  },
   "hello_world": "Bonjour le monde",
   "admin": "Administration",
   "dashboard": "Tableau de bord",
   "yes": "Oui",
   "no": "Non",
   "delete_resource": "Supprimer la resource",
-  "brand_name": "Cataas",
+  "brand_name": "CATAAS",
   "image": "Image",
   "validated": "Validé",
   "tags": "Tags",
   "edited_at": "Edité le",
   "created_at": "Créé le",
   "cats": "Chats",
-
   "actions": {
     "sign_in": "Se connecter",
     "logout": "Se déconnecter",
@@ -33,20 +122,75 @@
     "previous": "Précédent",
     "next": "Suivant"
   },
-
   "form": {
     "label": {
       "username": "Identifiant",
       "password": "Mot de passe",
       "remember_me": "Se souvenir de moi"
     },
-
-    "help": {
-    },
-
+    "help": {},
     "placeholder": {
       "username": "Entrez votre identifiant",
       "password": "Entrez votre mot de passe"
     }
+  },
+  "nav": {
+    "demo": "Démo",
+    "api": "API",
+    "usage": "Utilisation",
+    "cli": "CLI",
+    "docs": "Documentation",
+    "upload": "Envoyer un chat",
+    "home": "Accueil",
+    "support": "Soutenir le projet"
+  },
+  "footer": {
+    "made": "Fait avec ❤️ par",
+    "rights": "tous droits réservés",
+    "top": "Haut de page",
+    "upload": "Envoyer",
+    "follow": "Suivez-nous",
+    "donate": "Soutenir le projet"
+  },
+  "upload": {
+    "title": "Envoyer un chat",
+    "eyebrow": "/ Envoi",
+    "ok": "Votre chat a bien été envoyé ! Il apparaîtra une fois validé.",
+    "file": "Choisir un chat",
+    "tags": "Tags",
+    "tags_help": "Séparez les tags par des virgules",
+    "tags_placeholder": "mignon, roux, ...",
+    "submit": "Envoyer"
+  },
+  "admin_page": {
+    "title": "Administration",
+    "pending": "En attente",
+    "validated": "Validées",
+    "all": "Toutes",
+    "count": "{{count}} image(s)",
+    "empty": "Aucune image.",
+    "tags": "Tags",
+    "save": "Enregistrer",
+    "validate": "Valider",
+    "delete": "Supprimer",
+    "refuse": "Refuser",
+    "rotate_left": "Pivoter à gauche",
+    "rotate_right": "Pivoter à droite",
+    "confirm_delete": "Supprimer définitivement cette image ?",
+    "badge_validated": "Validée",
+    "badge_pending": "En attente",
+    "pagination": "Pagination",
+    "previous": "‹ Précédent",
+    "next": "Suivant ›",
+    "kb": "Ko"
+  },
+  "error_404": {
+    "title": "Page introuvable",
+    "text": "Ce chat s'est enfui.",
+    "back": "Retour à l'accueil"
+  },
+  "meta": {
+    "title": "$t(home.title)",
+    "description": "$t(home.hero.lead)"
   }
 }

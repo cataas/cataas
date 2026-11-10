@@ -1,17 +1,16 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
-    div.container
-        div.navbar-nav.d-block
-            ul.navbar-nav
-                li.nav-item
-                    a(href="/").nav-link.navbar-brand Cataas
-                li.nav-item
-                    a(href="/upload").nav-link 😻 Upload cat
-                li.nav-item
-                    a(href="/doc.html").nav-link 📚 API doc
-
-        ul.navbar-nav
-            li.nav-item.d-lg-flex.d-none
-                a(href="https://twitter.com/apicataas", target="_blank").nav-link
-                    | Follow on 🐦‍
-                a(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank").nav-link
-                    | Buy me a 🍺
+.site-bar
+    header.site-header.container
+        a.site-header__brand(href="/")
+            svg(width="30", height="30", viewBox="0 0 30 30", aria-hidden="true")
+                path(d="M4 26V6l7 6h8l7-6v20z", fill="#C6F432")
+                circle(cx="11.5", cy="18", r="1.8", fill="#0E0F13")
+                circle(cx="18.5", cy="18", r="1.8", fill="#0E0F13")
+            | CATAAS
+        nav.site-header__nav(aria-label="Main navigation")
+            a.site-header__link.hide-mobile(href="/#demo")= t('nav.demo')
+            a.site-header__link.hide-mobile(href="/#api")= t('nav.api')
+            a.site-header__link.hide-mobile(href="/#usage")= t('nav.usage')
+            a.site-header__link.hide-mobile(href="/#cli")= t('nav.cli')
+            a.site-header__link.hide-mobile(href="/upload")= t('nav.upload')
+            a.btn.btn--outline(href="https://www.buymeacoffee.com/kevinbalicot", target="_blank", rel="noopener", data-umami-event="support-project", data-umami-event-location="topbar")= t('nav.support')
+            a.btn.btn--primary.hide-mobile(href="/doc.html", data-umami-event="documentation", data-umami-event-location="topbar")= t('nav.docs')
